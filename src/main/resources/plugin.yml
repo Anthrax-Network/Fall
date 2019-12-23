@@ -1,0 +1,81 @@
+name: Fall
+version: 1.0
+main: me.hackusatepvp.fall.Fall
+authors: [iKeneny, Hackusate_PvP]
+description: Quite possibly the best kit plugin there is.
+commands:
+  broadcast:
+    aliases: [bc]
+    description: Broadcast a message to the entire server.
+  clan:
+    description: View all clan info.
+  class:
+    description: View all special classes.
+  combat:
+    aliases: [ct]
+    description: View your combat status.
+  creative:
+    aliases: [gmc]
+    description: Change your gamemode to creative.
+  discord:
+    description: Get the link to our wonderful discord.
+  eat:
+    aliases: [feed]
+    description: Fill your empty belly.
+  economy:
+    aliases: [bal, balance, eco]
+    description: All economy related commands.
+  enderchest:
+    aliases: [echest]
+    description: Quickly store things away.
+  fall:
+    description: View the main plugin info.
+  fixhand:
+    aliases: [fh]
+    description: Need a quick fix?
+  info:
+    description: Does nothing.
+  kits:
+    description: Open a nice gui to select your kit.
+  level:
+    description: View your current level.
+  list:
+    description: Get a list of staff and players online.
+  message:
+    aliases: [msg, m, dm, pm, whisper, tell]
+    description: Message a player privately.
+  nick:
+    description: Want a new name?
+  pay:
+    description: Send money to another player
+  ping:
+    description: View your latancy to the server.
+  quest:
+    description: View your current quest infomation.
+  rank:
+    description: Does nothing
+  ranks:
+    description: View all ranks and the requirements.
+  reply:
+    aliases: [r]
+    description: Message back to a pseron more easily
+  rules:
+    description: View the rules for the server
+  settings:
+    description: Chnage all your settings via GUI.
+  shop:
+    description: Open up the shop gui and spend.
+  stats:
+    description: View your pro level stats.
+  sumo:
+    description: Join or create a sumo event.
+  tags:
+    description: A simple GUI to handle all tags.
+  teleport:
+    aliases: [tp]
+    description: View all teleport commands
+  togglemessages:
+    aliases: [togglepm, toggledm, togglem, togglemsg]
+    description: Turn off your private messages
+  togglescoreboard:
+    description: Turn off your annoying scoreboard

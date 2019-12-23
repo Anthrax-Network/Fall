@@ -1,0 +1,32 @@
+MySQL:
+  host: "localhost"
+  port: "3306"
+  database: "fall"
+  username: "root"
+  password: ""
+
+Global:
+  MySQL:
+    host: "localhost"
+    port: "3306"
+    database: "global"
+    username: "root"
+    password: ""
+
+Sumo:
+  Lobby:
+    x: 0
+    y: 0
+    pitch: 0.00000
+    yaw: 0.000000
+  Arena:
+    First:
+      x: 0
+      y: 0
+      pitch: 0.00000
+      yaw: 0.000000
+    Second:
+      x: 0
+      y: 0
+      pitch: 0.00000
+      yaw: 0.000000
