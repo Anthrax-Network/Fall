@@ -1,5 +1,11 @@
 package me.hackusatepvp.fall.colors;
 
+import me.hackusatepvp.fall.colors.impl.BlueColor;
+import me.hackusatepvp.fall.colors.impl.GreenColor;
+import me.hackusatepvp.fall.colors.impl.RedColor;
+import me.hackusatepvp.fall.colors.impl.YellowColor;
+import me.hackusatepvp.fall.profile.Profile;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -9,6 +15,10 @@ public abstract class Color {
 
     private static Map<String, Color> byName = new HashMap<>();
 
+    private static final Color BLUE_COLOR = new BlueColor();
+    private static final Color GREEN_COLOR = new GreenColor();
+    private static final Color RED_COLOR = new RedColor();
+    private static final Color YELLOW_COLOR = new YellowColor();
 
     private String name;
 
@@ -29,4 +39,8 @@ public abstract class Color {
     public abstract String getPermission();
 
     public abstract ItemStack getIcon();
+
+    public void onClick(Player player, Profile profile, ItemStack itemStack) {
+
+    }
 }

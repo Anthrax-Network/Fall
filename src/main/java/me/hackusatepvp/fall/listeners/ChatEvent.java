@@ -70,7 +70,7 @@ public class ChatEvent implements Listener {
                     if (!profile.getNick().equals("null")) {
                         if (!profile.getTag().equals("null")) {
                             if (!profile.getDonor().equals("starter")) {
-                                online.sendMessage(StringUtil.format(Quest.getByName(profile.getDonor()) + " " + Tags.getByName(profile.getTag()).getPrefix() + " " + profile.getNick() + " &8» " + event.getMessage()));
+                                online.sendMessage(StringUtil.format(Quest.getByName(profile.getDonor()) + " " + Tags.getByName(profile.getTag()).getPrefix() + " " + profile.getColor() + profile.getNick() + " &8» " + event.getMessage()));
                             } else {
                                 online.sendMessage(StringUtil.format(Quest.getActiveQuest(profile).getPrefix() + " " + Tags.getByName(profile.getTag()).getPrefix() + profile.getColor() + " " + profile.getNick() + " &8» " + event.getMessage()));
                             }

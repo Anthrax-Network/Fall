@@ -1,6 +1,5 @@
 package me.hackusatepvp.fall.command;
 
-import app.ashcon.intake.Command;
 import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.util.StringUtil;
 import org.bukkit.entity.Player;

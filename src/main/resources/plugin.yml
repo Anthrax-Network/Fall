@@ -11,6 +11,8 @@ commands:
     description: View all clan info.
   class:
     description: View all special classes.
+  color:
+    description: Change the color of your name.
   combat:
     aliases: [ct]
     description: View your combat status.

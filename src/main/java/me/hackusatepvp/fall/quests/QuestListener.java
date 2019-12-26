@@ -64,9 +64,12 @@ public class QuestListener implements Listener {
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
 
-        if (!(event.getEntity() instanceof LivingEntity || event.getDamager() instanceof LivingEntity))
+        if (!(event.getDamager() instanceof  LivingEntity)) {
             return;
-
+        }
+        if (!(event.getEntity() instanceof LivingEntity)) {
+            return;
+        }
         LivingEntity damager = (LivingEntity) event.getDamager();
         LivingEntity victim = (LivingEntity) event.getEntity();
 

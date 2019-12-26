@@ -69,7 +69,13 @@ public class DeathEvevnt implements Listener {
                 killer.setLevel(prokiller.getLevel());
                 return;
             }
-            //todo world death message
+            for (Player online : Bukkit.getOnlinePlayers()) {
+                //Checking to see who has kill messages enabled
+                if (Fall.getInstance().getProfileManager().getProfile(online.getUniqueId()).isKillmsg()) {
+                    //sending the chat message to those who have kill messages enabled
+                    online.sendMessage(StringUtil.format("&c&l" + player.getName() + " &7has died"));
+                }
+            }
             //Checking to see if the player is in a clan
             if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
                 ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);

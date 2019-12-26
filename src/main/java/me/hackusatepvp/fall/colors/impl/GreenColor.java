@@ -9,28 +9,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class RedColor extends Color {
+public class GreenColor extends Color {
 
-
-    public RedColor() {
-        super(StringUtil.format("&7* &cRed"));
+    public GreenColor() {
+        super(StringUtil.format("&7* &aGreen"));
     }
 
     @Override
     public String getPrefix() {
-        return "&c";
+        return "&a";
     }
 
     @Override
     public String getPermission() {
-        return "fall.colors.red";
+        return "fall.colors.green";
     }
 
     @Override
     public ItemStack getIcon() {
-        ItemStack itemStack = new ItemStack(Material.INK_SACK, 1, (byte) 1);
+        ItemStack itemStack = new ItemStack(Material.INK_SACK, 1, (byte) 10);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(StringUtil.format("&7* &cRed"));
+        itemMeta.setDisplayName(StringUtil.format("&7* &aGreen"));
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

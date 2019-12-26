@@ -10,6 +10,8 @@ import me.hackusatepvp.fall.clans.ClansCommand;
 import me.hackusatepvp.fall.classes.ClassesGUI;
 import me.hackusatepvp.fall.classes.ClassesManager;
 import me.hackusatepvp.fall.classes.ClassesTask;
+import me.hackusatepvp.fall.colors.ColorGUI;
+import me.hackusatepvp.fall.colors.ColorListener;
 import me.hackusatepvp.fall.combat.CombatManager;
 import me.hackusatepvp.fall.combat.CombatTask;
 import me.hackusatepvp.fall.command.*;
@@ -72,6 +74,7 @@ public final class Fall extends JavaPlugin {
     private ShopGUI shopGUI;
     private TagsGUI tagsGUI;
     private KitsGUI kitsGUI;
+    private ColorGUI colorGUI;
 
     public void onEnable() {
         instance = this;
@@ -123,7 +126,6 @@ public final class Fall extends JavaPlugin {
         idHandler = new IDHandler();
         gameManager = new GameManager();
         gameTimer = new GameTimer();
-        gameTimer.runTaskTimer(this, 0, 20);
         combatManager = new CombatManager();
         combatTask = new CombatTask();
         combatTask.runTaskTimer(this, 0 ,20);
@@ -134,6 +136,7 @@ public final class Fall extends JavaPlugin {
         shopGUI = new ShopGUI();
         tagsGUI = new TagsGUI();
         kitsGUI = new KitsGUI();
+        colorGUI = new ColorGUI();
     }
 
     public void onDisable() {
@@ -156,7 +159,7 @@ public final class Fall extends JavaPlugin {
 
     private void registerListeners() {
         Arrays.asList(new ProfileListener(), new ServerListener(), new InfoGUI(), new DeathEvevnt(), new ChatEvent(), new SettingsGUI(), new QuestListener(), new PlayerListener(), new ClanListener(),
-                new PatchEvent(), new SumoListener(), new ClassesGUI(), new ShopListener(), new TagsListener(), new KitsListener())
+                new PatchEvent(), new SumoListener(), new ClassesGUI(), new ShopListener(), new TagsListener(), new KitsListener(), new ColorListener())
                 .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
@@ -164,6 +167,7 @@ public final class Fall extends JavaPlugin {
         getCommand("broadcast").setExecutor(new BroadcastCommand());
         getCommand("clan").setExecutor(new ClansCommand());
         getCommand("class").setExecutor(new ClassCommand());
+        getCommand("color").setExecutor(new ColorCommand());
         getCommand("combat").setExecutor(new CombatCommand());
         getCommand("creative").setExecutor(new CreativeCommand());
         getCommand("discord").setExecutor(new DiscordCommand());

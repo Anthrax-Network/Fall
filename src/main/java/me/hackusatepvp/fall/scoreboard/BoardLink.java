@@ -64,7 +64,11 @@ public class BoardLink implements AssembleAdapter {
                         } else {
                             blue.add("&7Combat: &bfalse");
                         }
-                        blue.add("&7Pearl: &b" + "false");
+                        if (!Fall.getInstance().getCombatManager().isPearlCooldown(player)) {
+                            blue.add("&7Pearl: &b" + "false");
+                        } else {
+                            blue.add("&7Pearl: &b" + Fall.getInstance().getCombatManager().getPearCooldown(player));
+                        }
                         blue.add("&7&m--------------------");
                         return blue;
                     } else if (profile.getBoardstyle().equalsIgnoreCase("red")) {
@@ -85,7 +89,11 @@ public class BoardLink implements AssembleAdapter {
                         } else {
                             red.add("&7Combat: &cfalse");
                         }
-                        red.add("&7Pearl: &c" + "false");
+                        if (!Fall.getInstance().getCombatManager().isPearlCooldown(player)) {
+                            red.add("&7Pearl: &c" + "false");
+                        } else {
+                            red.add("&7Pearl: &c" + Fall.getInstance().getCombatManager().getPearCooldown(player));
+                        }
                         red.add("&7&m--------------------");
                         return red;
                     } else if (profile.getBoardstyle().equalsIgnoreCase("green")) {
@@ -106,7 +114,11 @@ public class BoardLink implements AssembleAdapter {
                         } else {
                             green.add("&7Combat: &afalse");
                         }
-                        green.add("&7Pearl: &a" + "false");
+                        if (!Fall.getInstance().getCombatManager().isPearlCooldown(player)) {
+                            green.add("&7Pearl: &a" + "false");
+                        } else {
+                            green.add("&7Pearl: &a" + Fall.getInstance().getCombatManager().getPearCooldown(player));
+                        }
                         green.add("&7&m--------------------");
                         return green;
                     } else if (profile.getBoardstyle().equalsIgnoreCase("white")) {
@@ -127,7 +139,11 @@ public class BoardLink implements AssembleAdapter {
                         } else {
                             white.add("&7Combat: &ffalse");
                         }
-                        white.add("&7Pearl: &f" + "false");
+                        if (!Fall.getInstance().getCombatManager().isPearlCooldown(player)) {
+                            white.add("&7Pearl: &f" + "false");
+                        } else {
+                            white.add("&7Pearl: &f" + Fall.getInstance().getCombatManager().getPearCooldown(player));
+                        }
                         white.add("&7&m--------------------");
                         return white;
                     }
@@ -136,7 +152,7 @@ public class BoardLink implements AssembleAdapter {
                         if (profile.getBoardstyle().equalsIgnoreCase("blue")) {
                             final List<String> waiting = new ArrayList<>();
                             waiting.add("&7&m--------------------");
-                            waiting.add("&4Players: &7(&c" + Fall.getInstance().getGameManager().getGame().size() + "&7/&b16&7)");
+                            waiting.add("&9Players: &7(&b" + Fall.getInstance().getGameManager().getGame().size() + "&7/&b16&7)");
                             waiting.add("&9Starting: &7" + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getGameTimer().getTotal()));
                             waiting.add("&7&m--------------------");
                             return waiting;
@@ -152,7 +168,7 @@ public class BoardLink implements AssembleAdapter {
                         if (profile.getBoardstyle().equalsIgnoreCase("green")) {
                             final List<String> waiting = new ArrayList<>();
                             waiting.add("&7&m--------------------");
-                            waiting.add("&4Players: &7(&c" + Fall.getInstance().getGameManager().getGame().size() + "&7/&a16&7)");
+                            waiting.add("&2Players: &7(&a" + Fall.getInstance().getGameManager().getGame().size() + "&7/&a16&7)");
                             waiting.add("&2Starting: &7" + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getGameTimer().getTotal()));
                             waiting.add("&7&m--------------------");
                             return waiting;
@@ -160,7 +176,7 @@ public class BoardLink implements AssembleAdapter {
                         if (profile.getBoardstyle().equalsIgnoreCase("white")) {
                             final List<String> waiting = new ArrayList<>();
                             waiting.add("&7&m--------------------");
-                            waiting.add("&4Players: &7(&c" + Fall.getInstance().getGameManager().getGame().size() + "&7/&f16&7)");
+                            waiting.add("&fPlayers: &7(&f" + Fall.getInstance().getGameManager().getGame().size() + "&7/&f16&7)");
                             waiting.add("&fStarting: &7" + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getGameTimer().getTotal()));
                             waiting.add("&7&m--------------------");
                             return waiting;

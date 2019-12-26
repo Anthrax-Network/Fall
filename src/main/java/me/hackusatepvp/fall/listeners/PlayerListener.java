@@ -6,6 +6,7 @@ import me.hackusatepvp.fall.quests.Quest;
 import me.hackusatepvp.fall.util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -16,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -128,11 +130,13 @@ public class PlayerListener implements Listener {
             ProjectileSource source = enderPearl.getShooter();
             if (source instanceof Player) {
                 Player shooter = (Player) source;
-                Fall.getInstance().getCombatManager().setPearlCooldown(shooter, 16);
                 if (Fall.getInstance().getCombatManager().isPearlCooldown(shooter)) {
                     shooter.sendMessage(StringUtil.format("&cYou cannot do that for another " + Fall.getInstance().getCombatManager().getPearCooldown(shooter) + "s"));
+                    event.setCancelled(true);
+                    shooter.getInventory().addItem(new ItemStack(Material.ENDER_PEARL));
+                } else {
+                    Fall.getInstance().getCombatManager().setPearlCooldown(shooter, 16);
                 }
-                event.setCancelled(true);
             }
         }
     }

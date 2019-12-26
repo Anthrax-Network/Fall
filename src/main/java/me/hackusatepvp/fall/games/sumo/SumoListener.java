@@ -62,28 +62,31 @@ public class SumoListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        UUID playerUUID = event.getPlayer().getUniqueId();
-        Location spawn = new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
-                Fall.getInstance().getConfig().getFloat("Sumo.Lobby.pitch"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.yaw"));
-
-        if (!isInWater(event.getPlayer())) {
-            if (event.getTo().getBlockX() == event.getFrom().getBlockX() &&
-                    event.getTo().getBlockY() == event.getFrom().getBlockY() &&
-                    event.getTo().getBlockZ() == event.getFrom().getBlockZ()) {
-                return;
-            }
-        } else {
-            if (Fall.getInstance().getGameManager().getGameState() == GameState.STARTING) {
-                if (Fall.getInstance().getGameManager().getName().contains(player.getName())) {
-                    if (isInWater(event.getPlayer())) {
-                        event.getPlayer().teleport(Bukkit.getWorld("world").getSpawnLocation());
-                        event.getPlayer().sendMessage(StringUtil.format("&4&lEvent &8» &fYou were removed from the event."));
-                        event.getPlayer().getInventory().clear();
-                        Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&9" + player.getName() + " &7has been eliminated &c" + Fall.getInstance().getGameTimer().getPlayer1() + " &7wins.")));
+        if (Fall.getInstance().getGameManager().getGame().contains(player)) {
+            if (Fall.getInstance().getGameManager().getGameState() == GameState.GAME) {
+                if (Fall.getInstance().getGameTimer().getPlayer1().equals(player.getName())) {
+                    if (player.getLocation().getY() <= Fall.getInstance().getConfig().getInt("Sumo.Arena.Y")) {
+                        Fall.getInstance().getGameManager().getGame().remove(player);
+                        player.sendMessage(ChatColor.RED + "You have been eliminated.");
+                        Player player2 = Bukkit.getPlayer(Fall.getInstance().getGameTimer().getPlayer2());
+                        player2.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
+                                Fall.getInstance().getConfig().getFloat("Sumo.Lobby.pitch"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.yaw")));
+                        Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&9" + player.getName() + " &7has been eliminated &c" + Fall.getInstance().getGameTimer().getPlayer2() + " &7wins.")));
                         Fall.getInstance().getGameManager().setGameState(GameState.WAITING);
                         Fall.getInstance().getGameTimer().setLeft(60);
-                        player.teleport(spawn);
-                        Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&4&lEvent &8» &a" + Fall.getInstance().getGameTimer().getPlayer1() + "&f has won against opponent &c" + Fall.getInstance().getGameTimer().getPlayer2() + "&7 (" + Fall.getInstance().getGameManager().getGame().stream() + " remaining)")));
+                    }
+                } else {
+                    if (Fall.getInstance().getGameTimer().getPlayer2().equals(player.getName())) {
+                        if (player.getLocation().getY() <= Fall.getInstance().getConfig().getInt("Sumo.Arena.Y")) {
+                            Fall.getInstance().getGameManager().getGame().remove(player);
+                            player.sendMessage(ChatColor.RED + "You have been eliminated.");
+                            Player player1 = Bukkit.getPlayer(Fall.getInstance().getGameTimer().getPlayer1());
+                            player1.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
+                                    Fall.getInstance().getConfig().getFloat("Sumo.Lobby.pitch"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.yaw")));
+                            Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&9" + player.getName() + " &7has been eliminated &c" + Fall.getInstance().getGameTimer().getPlayer2() + " &7wins.")));
+                            Fall.getInstance().getGameManager().setGameState(GameState.WAITING);
+                            Fall.getInstance().getGameTimer().setLeft(60);
+                        }
                     }
                 }
             }
@@ -104,6 +107,9 @@ public class SumoListener implements Listener {
                     Fall.getInstance().getGameTimer().setLeft(60);
                     Fall.getInstance().getGameManager().getGame().remove(player);
                 } else if (Fall.getInstance().getGameTimer().getPlayer2().equals(player.getName())) {
+                    if (Fall.getInstance().getGameManager().getGame().size() == 2) {
+
+                    }
                     Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&9" + player.getName() + " &7has disconnected &c" + Fall.getInstance().getGameTimer().getPlayer1() + " &7wins.")));
                     Fall.getInstance().getGameManager().setGameState(GameState.WAITING);
                     Fall.getInstance().getGameTimer().setLeft(60);

@@ -40,7 +40,7 @@ public class SettingsGUI implements Listener {
     }
 
     public ItemStack getTablist(Player player) {
-        ItemStack itemStack = new ItemStack(Material.PAPER);
+        ItemStack itemStack = new ItemStack(Material.MAP);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(StringUtil.format("&7* &b&lTablist"));
         itemStack.setItemMeta(itemMeta);

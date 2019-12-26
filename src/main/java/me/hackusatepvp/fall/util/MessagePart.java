@@ -1,7 +1,7 @@
 package me.hackusatepvp.fall.util;
 
+import com.google.gson.stream.JsonWriter;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonWriter;
 
 final class MessagePart {
     ChatColor color;

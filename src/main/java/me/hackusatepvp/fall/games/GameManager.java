@@ -2,11 +2,8 @@ package me.hackusatepvp.fall.games;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class GameManager {
@@ -63,7 +60,7 @@ public class GameManager {
         }
     }
 
-    public  HashSet<Player> getGame() {
+    public HashSet<Player> getGame() {
         return this.game;
     }
 }

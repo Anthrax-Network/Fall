@@ -55,12 +55,11 @@ public class SumoCommand implements CommandExecutor {
                             return true;
                         }
                         player.sendMessage(ChatColor.GREEN + "You have created a sumo event.");
-                        Fall.getInstance().getGameManager().getGame().add(player);
                         Fall.getInstance().getGameTimer().start();
                         Fall.getInstance().getGameManager().setGameState(GameState.WAITING);
+                        Fall.getInstance().getGameManager().getGame().add(player);
                         Fall.getInstance().getGameManager().setName(player.getName());
                         Fall.getInstance().getGameTimer().setLeft(60);
-                        Fall.getInstance().getGameTimer().start();
                         Bukkit.getOnlinePlayers().forEach(instance -> instance.sendMessage(StringUtil.format("&9" + player.getName() + " &7 has started a sumo event. &b(/sumo join)")));
                     } else {
                         player.sendMessage(ChatColor.RED + "This is a donor command.");
@@ -86,6 +85,7 @@ public class SumoCommand implements CommandExecutor {
                         Fall.getInstance().getConfig().set("Sumo.Arena.First.pitch", player.getLocation().getPitch());
                         Fall.getInstance().getConfig().set("Sumo.Arena.First.yaw", player.getLocation().getYaw());
                         Fall.getInstance().saveConfig();
+                        player.sendMessage(ChatColor.GREEN + "You have updated pos1.");
                     }
                     if (args[0].equalsIgnoreCase("setpos2")) {
                         Fall.getInstance().getConfig().set("Sumo.Arena.Second.x", player.getLocation().getX());
@@ -94,6 +94,12 @@ public class SumoCommand implements CommandExecutor {
                         Fall.getInstance().getConfig().set("Sumo.Arena.Second.pitch", player.getLocation().getPitch());
                         Fall.getInstance().getConfig().set("Sumo.Arena.Second.yaw", player.getLocation().getYaw());
                         Fall.getInstance().saveConfig();
+                        player.sendMessage(ChatColor.GREEN + "You have updated pos2.");
+                    }
+                    if (args[0].equalsIgnoreCase("sety")) {
+                        Fall.getInstance().getConfig().set("Sumo.Arena.Y", player.getLocation().getY());
+                        Fall.getInstance().saveConfig();
+                        player.sendMessage(ChatColor.GREEN + "You have updated y.");
                     }
                 } else {
                     player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");

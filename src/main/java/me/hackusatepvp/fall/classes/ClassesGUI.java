@@ -46,7 +46,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 StringUtil.format(lore);
                 im.setLore(lore);
@@ -55,7 +55,7 @@ public class ClassesGUI implements Listener {
             } else {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&aClick to use this kit.");
+                lore.add(StringUtil.format("&aClick to use this kit."));
                 lore.add("");
                 StringUtil.format(lore);
                 im.setLore(lore);
@@ -87,7 +87,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -95,7 +95,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -117,7 +117,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -125,7 +125,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -147,7 +147,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -155,7 +155,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -177,7 +177,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -185,7 +185,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -207,7 +207,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -215,7 +215,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -237,7 +237,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -245,7 +245,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -267,7 +267,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -275,7 +275,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
@@ -297,7 +297,7 @@ public class ClassesGUI implements Listener {
             if (Fall.getInstance().getClassesManager().isCooldown(player)) {
                 List<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player)));
+                lore.add(StringUtil.format("&cCannot use this kit. " + TimeUtils.IntegerCountdown.setFormat(Fall.getInstance().getClassesManager().getCooldown(player))));
                 lore.add("");
                 itemMeta.setLore(lore);
                 itemStack.setItemMeta(itemMeta);
@@ -305,7 +305,7 @@ public class ClassesGUI implements Listener {
             }
             List<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add("&aClick to use this kit.");
+            lore.add(StringUtil.format("&aClick to use this kit."));
             lore.add("");
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
