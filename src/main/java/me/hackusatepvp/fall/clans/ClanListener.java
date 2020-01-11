@@ -157,15 +157,9 @@ public class ClanListener implements Listener {
                         if (clanp.getName().equalsIgnoreCase(clana.getName())) {
                             event.setCancelled(true);
                         }
-                        return;
                     }
-                    return;
                 }
-                return;
             }
-            return;
         }
-        return;
     }
-
 }
