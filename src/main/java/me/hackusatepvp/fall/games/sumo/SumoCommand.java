@@ -41,7 +41,20 @@ public class SumoCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "You have already joined the event.");
                         return true;
                     }
+                    if (Fall.getInstance().getGameTimer().isStarted()) {
+                        player.sendMessage(ChatColor.RED + "I'm sorry, you cannot join the event at this time.");
+                        return true;
+                    }
+                    if (Fall.getInstance().getCombatManager().inCombat(player)) {
+                        player.sendMessage(ChatColor.RED + "Cannot join the even whilst in combat.");
+                        return true;
+                    }
                     player.sendMessage(ChatColor.GREEN + "You have joined the game.");
+                    Fall.getInstance().getGameManager().getPlayerinvs().put(player, player.getInventory().getContents());
+                    Fall.getInstance().getGameManager().getPlayerArmour().put(player, player.getInventory().getArmorContents());
+                    player.getActivePotionEffects().clear();
+                    player.getInventory().clear();
+                    player.getInventory().setArmorContents(null);
                     Fall.getInstance().getGameManager().getGame().add(player);
                     Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&9" + player.getName() + " &7has joined the event.")));
                     player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
@@ -55,12 +68,20 @@ public class SumoCommand implements CommandExecutor {
                             return true;
                         }
                         player.sendMessage(ChatColor.GREEN + "You have created a sumo event.");
-                        Fall.getInstance().getGameTimer().start();
+                        Fall.getInstance().getGameManager().getPlayerinvs().put(player, player.getInventory().getContents());
+                        Fall.getInstance().getGameManager().getPlayerArmour().put(player, player.getInventory().getArmorContents());
+                        player.getInventory().clear();
+                        player.getInventory().setArmorContents(null);
+                        player.getActivePotionEffects().clear();
+                        Fall.getInstance().getGameTimer().runTaskTimer(Fall.getInstance(), 20, 20);
                         Fall.getInstance().getGameManager().setGameState(GameState.WAITING);
                         Fall.getInstance().getGameManager().getGame().add(player);
                         Fall.getInstance().getGameManager().setName(player.getName());
+                        Fall.getInstance().getGameTimer().setStarted(false);
                         Fall.getInstance().getGameTimer().setLeft(60);
                         Bukkit.getOnlinePlayers().forEach(instance -> instance.sendMessage(StringUtil.format("&9" + player.getName() + " &7 has started a sumo event. &b(/sumo join)")));
+                        player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
+                                Fall.getInstance().getConfig().getFloat("Sumo.Lobby.pitch"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.yaw")));
                     } else {
                         player.sendMessage(ChatColor.RED + "This is a donor command.");
                     }

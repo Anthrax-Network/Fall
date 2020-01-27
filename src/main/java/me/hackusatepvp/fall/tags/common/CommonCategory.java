@@ -40,4 +40,9 @@ public class CommonCategory extends Category {
         i.setItem(5, Tags.getByName(StringUtil.format("&aSoldier &7Tag")).getIcon());
         return i;
     }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

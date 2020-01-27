@@ -9,25 +9,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class HeroTag extends Tags {
+public class VillainTag extends Tags {
 
-    public HeroTag() {
-        super(StringUtil.format("&bHero &7Tag"));
+    public VillainTag() {
+        super(StringUtil.format("&5Villain &7Tag"));
     }
 
     @Override
     public String getName() {
-        return StringUtil.format("&bHero &7Tag");
+        return StringUtil.format("&5Villain &7Tag");
     }
 
     @Override
     public String getPrefix() {
-        return "&7[&bHero&7]";
+        return "&7[&5Villain&7]";
     }
 
     @Override
     public String getPermission() {
-        return "fall.tags.rare.hero";
+        return "fall.tags.rare.villain";
     }
 
     @Override
@@ -39,14 +39,14 @@ public class HeroTag extends Tags {
     public ItemStack getIcon() {
         ItemStack itemStack = new ItemStack(Material.NAME_TAG);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(StringUtil.format("&bHero &7Tag"));
+        itemMeta.setDisplayName(StringUtil.format("&5Villain &7Tag"));
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
 
     @Override
     public void onClick(Player player, Profile profile, String tag) {
-        if (tag.contains("Hero")) {
+        if (tag.contains("Shrug")) {
             if (player.hasPermission(getPermission())) {
                 if (isEnabled()) {
                     if (!profile.getTag().equals("null")) {

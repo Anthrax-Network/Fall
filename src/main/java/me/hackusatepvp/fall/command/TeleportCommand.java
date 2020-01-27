@@ -24,7 +24,7 @@ public class TeleportCommand implements CommandExecutor {
                             player.teleport(target.getLocation());
                             player.sendMessage("You have teleported to " + target.getName() + ".");
                         } else {
-                            player.sendMessage("Target nto found.");
+                            player.sendMessage("Target not found.");
                         }
                     }
 

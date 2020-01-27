@@ -2,6 +2,7 @@ package me.hackusatepvp.fall.command;
 
 import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.profile.Profile;
+import me.hackusatepvp.fall.profile.ProfileManager;
 import me.hackusatepvp.fall.rank.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -24,6 +25,8 @@ public class RankCommand implements CommandExecutor {
             Player target = Bukkit.getPlayerExact(args[0]);
             Profile profile = Fall.getInstance().getProfileManager().getProfile(target.getUniqueId());
             profile.setDonor(args[1]);
+            Fall.getInstance().getProfileManager().unload(target);
+            Fall.getInstance().getProfileManager().load(target);
         }
         return false;
     }

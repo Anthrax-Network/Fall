@@ -57,10 +57,13 @@ public class ProfileListener implements Listener {
                             profile.setActiveQuest(Quest.FATE_QUEST.getName());
                             break;
                     }
+                    player.setLevel(profile.getLevel());
+                    player.setExp(profile.getXp());
                 } else {
                     Fall.getInstance().getProfileManager().load(player);
                     Fall.getInstance().getProfileManager().addProfile(player.getUniqueId(), Fall.getInstance().getProfileManager().getProfile(player.getUniqueId()));
                 }
+
             }
 
             @Override

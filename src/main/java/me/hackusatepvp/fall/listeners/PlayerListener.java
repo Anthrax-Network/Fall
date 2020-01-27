@@ -3,6 +3,7 @@ package me.hackusatepvp.fall.listeners;
 import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.profile.Profile;
 import me.hackusatepvp.fall.quests.Quest;
+import me.hackusatepvp.fall.staff.Staff;
 import me.hackusatepvp.fall.util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

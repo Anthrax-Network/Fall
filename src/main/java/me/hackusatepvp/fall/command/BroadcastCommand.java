@@ -23,9 +23,7 @@ public class BroadcastCommand implements CommandExecutor {
                 for (int i = 0; i < args.length; ++i) {
                     reason = reason + args[i] + " ";
                 }
-                Iterator var1 = Bukkit.getOnlinePlayers().iterator();
-                while (var1.hasNext()) {
-                    Player online = (Player) var1.next();
+                for (Player online : Bukkit.getOnlinePlayers()) {
                     online.sendMessage(format("&7[&4FateKits&] " + reason));
                 }
             }
@@ -45,9 +43,7 @@ public class BroadcastCommand implements CommandExecutor {
             for (int i = 0; i < args.length; ++i) {
                 reason = reason + args[i] + " ";
             }
-            Iterator var1 = Bukkit.getOnlinePlayers().iterator();
-            while (var1.hasNext()) {
-                Player online = (Player) var1.next();
+            for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(format("&7[&4FateKits&] " + reason));
             }
         }

@@ -13,6 +13,12 @@ Global:
     username: "root"
     password: ""
 
+Naughty:
+  Words:
+    - "nigger"
+    - "nigga"
+    -
+
 Sumo:
   Lobby:
     x: 0

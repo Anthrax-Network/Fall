@@ -12,6 +12,7 @@ commands:
   class:
     description: View all special classes.
   color:
+    aliases: [colors, cc]
     description: Change the color of your name.
   combat:
     aliases: [ct]
@@ -67,6 +68,9 @@ commands:
     description: Chnage all your settings via GUI.
   shop:
     description: Open up the shop gui and spend.
+  staff:
+    aliases: [mod, h, hacker, modmode, staffmode]
+    description: Monitor potential hackers.
   stats:
     description: View your pro level stats.
   sumo:
@@ -81,3 +85,6 @@ commands:
     description: Turn off your private messages
   togglescoreboard:
     description: Turn off your annoying scoreboard
+  vanish:
+    aliases: [v]
+    description: Disappear from the world.

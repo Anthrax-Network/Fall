@@ -1,9 +1,6 @@
 package me.hackusatepvp.fall.colors;
 
-import me.hackusatepvp.fall.colors.impl.BlueColor;
-import me.hackusatepvp.fall.colors.impl.GreenColor;
-import me.hackusatepvp.fall.colors.impl.RedColor;
-import me.hackusatepvp.fall.colors.impl.YellowColor;
+import me.hackusatepvp.fall.colors.impl.*;
 import me.hackusatepvp.fall.profile.Profile;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -19,6 +16,7 @@ public abstract class Color {
     private static final Color GREEN_COLOR = new GreenColor();
     private static final Color RED_COLOR = new RedColor();
     private static final Color YELLOW_COLOR = new YellowColor();
+    private static final Color PURPLE_COLOR = new PurpleColor();
 
     private String name;
 

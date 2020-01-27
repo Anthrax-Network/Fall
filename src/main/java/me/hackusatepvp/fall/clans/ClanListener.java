@@ -112,28 +112,6 @@ public class ClanListener implements Listener {
                         profile.setClan(clan.getName());
                     }
                 }
-
-                /*if (clan != null) {
-                    if (clanPlayer != null) {
-                        Fall.getInstance().getClanManager().addToClan(clan, clanPlayer);
-                        player.sendMessage(ChatColor.GREEN + "You should now be in a clan.");
-                    } else {
-                        new ClanPlayer(player.getUniqueId(), clan, profile.getClanrank(), profile.getLadder());
-                        player.sendMessage("Trying again...");
-                        load(player);
-                    }
-                } else {
-                    Clan work = new Clan(profile.getLeader(), profile.getClan(), profile.getPrefix());
-                    if (clanPlayer != null) {
-                        Fall.getInstance().getClanManager().addToClan(work, clanPlayer);
-                        player.sendMessage(ChatColor.GREEN + "You should now be in a clan.");
-                    } else {
-                        ClanPlayer attempt = new ClanPlayer(player.getUniqueId(), work, profile.getClanrank(), profile.getLadder());
-                        Fall.getInstance().getClanManager().addToClan(work, attempt);
-                        player.sendMessage("Trying again...");
-                        load(player);
-                    }
-                } */
             } else {
                 player.sendMessage("Profile did not load correctly or you were never in a clan.");
             }
@@ -157,15 +135,9 @@ public class ClanListener implements Listener {
                         if (clanp.getName().equalsIgnoreCase(clana.getName())) {
                             event.setCancelled(true);
                         }
-                        return;
                     }
-                    return;
                 }
-                return;
             }
-            return;
         }
-        return;
     }
-
 }

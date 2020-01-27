@@ -23,8 +23,12 @@ public class TagsListener implements Listener {
                         if (event.getClickedInventory().getName().equals(Fall.getInstance().getTagsGUI().getTagsGUI(player).getName())) {
                             event.setCancelled(true);
                             if (Category.getByName(event.getCurrentItem().getType().name()) != null) {
-                                Category shop = Category.getByName(event.getCurrentItem().getType().name());
-                                player.openInventory(shop.getInventory());
+                                Category category = Category.getByName(event.getCurrentItem().getType().name());
+                                if (category.isEnabled()) {
+                                    player.openInventory(category.getInventory());
+                                } else {
+                                    player.sendMessage(StringUtil.format("&cThere are no special tags available at this moment."));
+                                }
                                 return;
                             }
                         }

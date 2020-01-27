@@ -1,4 +1,4 @@
-package me.hackusatepvp.fall.tags.rare.impl;
+package me.hackusatepvp.fall.tags.special.impl;
 
 import me.hackusatepvp.fall.profile.Profile;
 import me.hackusatepvp.fall.tags.Tags;
@@ -9,25 +9,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class HeroTag extends Tags {
+public class EasterTag extends Tags {
 
-    public HeroTag() {
-        super(StringUtil.format("&bHero &7Tag"));
+    public EasterTag() {
+        super("Easter");
     }
 
     @Override
     public String getName() {
-        return StringUtil.format("&bHero &7Tag");
+        return "Easter";
     }
 
     @Override
     public String getPrefix() {
-        return "&7[&bHero&7]";
+        return "&7[&aE&fa&as&ft&ae&fr&7]";
     }
 
     @Override
     public String getPermission() {
-        return "fall.tags.rare.hero";
+        return "fall.tags.special.easter";
     }
 
     @Override
@@ -37,23 +37,21 @@ public class HeroTag extends Tags {
 
     @Override
     public ItemStack getIcon() {
-        ItemStack itemStack = new ItemStack(Material.NAME_TAG);
+        ItemStack itemStack = new ItemStack(Material.SNOW_BALL);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(StringUtil.format("&bHero &7Tag"));
+        itemMeta.setDisplayName(StringUtil.format("&aEaster &7Tag"));
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
 
     @Override
     public void onClick(Player player, Profile profile, String tag) {
-        if (tag.contains("Hero")) {
+        if (tag.contains("Easter")) {
             if (player.hasPermission(getPermission())) {
                 if (isEnabled()) {
                     if (!profile.getTag().equals("null")) {
-                        if (profile.getTag().equalsIgnoreCase(getName())) {
-                            profile.setTag("null");
-                            player.sendMessage(ChatColor.RED + "You have removed your tag.");
-                        }
+                        profile.setTag("null");
+                        player.sendMessage(ChatColor.RED + "You have removed your tag.");
                     } else {
                         profile.setTag(getName());
                         player.sendMessage(ChatColor.GREEN + "You have updated your tag.");

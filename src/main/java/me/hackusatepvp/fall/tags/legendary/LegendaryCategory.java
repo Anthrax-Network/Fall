@@ -35,6 +35,12 @@ public class LegendaryCategory extends Category {
         i.setItem(0, Tags.getByName(StringUtil.format("&5Legend &7Tag")).getIcon());
         i.setItem(1, Tags.getByName(StringUtil.format("&6Howl &cTag")).getIcon());
         i.setItem(2, Tags.getByName(StringUtil.format("&4Reaper &7Tag")).getIcon());
+        i.setItem(3, Tags.getByName(StringUtil.format("&e&lExcalibur &cTag")).getIcon());
         return i;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

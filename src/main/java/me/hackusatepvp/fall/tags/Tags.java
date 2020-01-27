@@ -2,11 +2,16 @@ package me.hackusatepvp.fall.tags;
 
 import me.hackusatepvp.fall.profile.Profile;
 import me.hackusatepvp.fall.tags.common.impl.*;
+import me.hackusatepvp.fall.tags.legendary.impl.ExcaliburTag;
 import me.hackusatepvp.fall.tags.legendary.impl.HowlTag;
 import me.hackusatepvp.fall.tags.legendary.impl.LegendTag;
 import me.hackusatepvp.fall.tags.legendary.impl.ReaperTag;
 import me.hackusatepvp.fall.tags.rare.impl.HeroTag;
+import me.hackusatepvp.fall.tags.rare.impl.KillerTag;
+import me.hackusatepvp.fall.tags.rare.impl.ShrugTag;
+import me.hackusatepvp.fall.tags.rare.impl.VillainTag;
 import me.hackusatepvp.fall.tags.special.impl.ChristmasTag;
+import me.hackusatepvp.fall.tags.special.impl.EasterTag;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -25,12 +30,17 @@ public abstract class Tags {
     private static final Tags OOF_TAG = new OofTag();
 
     private static final Tags HERO_TAG = new HeroTag();
+    private static final Tags KILLER_TAG = new KillerTag();
+    private static final Tags SHRUG_TAG = new ShrugTag();
+    private static final Tags VILLAIN_TAG = new VillainTag();
 
     private static final Tags LEGEND_TAG = new LegendTag();
     private static final Tags HOWL_TAG = new HowlTag();
     private static final Tags REAPER_TAG = new ReaperTag();
+    private static final Tags EXCALIBUR_TAG =  new ExcaliburTag();
 
     private static final Tags CHRISTMAS_TAG = new ChristmasTag();
+    private static final Tags EASTER_TAG = new EasterTag();
 
     private String name;
 

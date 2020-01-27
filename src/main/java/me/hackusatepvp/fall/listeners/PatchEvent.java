@@ -68,5 +68,10 @@ public class PatchEvent implements Listener {
         event.setQuitMessage(null);
         Player player = event.getPlayer();
         Bukkit.getOnlinePlayers().forEach(instance -> instance.sendMessage(StringUtil.format("&c- &7" + player.getName())));
+        if (Fall.getInstance().getBountyManager().hasBounty(player.getUniqueId())) {
+            Bukkit.getOnlinePlayers().forEach(instance -> instance.sendMessage(StringUtil.format("&c" + player.getName() + " &7has quit the game, a new bounty will be created.")));
+            Fall.getInstance().getBountyTimer().setLeft(60);
+            Fall.getInstance().getBountyTimer().setRunning(false);
+        }
     }
 }

@@ -28,13 +28,14 @@ public class ClansCommand implements CommandExecutor {
             ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);
             if (args.length == 0) {
                 List<String> helpMessages = new ArrayList<>();
-                helpMessages.add("&7&m------------------------------");
+                helpMessages.add("&7&m-----------------------------------");
                 if (clanPlayer.getLadder() >= 2) {
                     helpMessages.add("&7* &b/clan &9invite &7(Invite a player to the clan.)");
                     helpMessages.add("&7* &b/clan &9kick &7(kick a player from the clan.)");
                 }
                 helpMessages.add("&7* &b/clan &9stats &7(Get stats from a clan)");
-                helpMessages.add("&7&m------------------------------");
+                helpMessages.add("&7* &b/clan &9roaster &7(Get the roaster of the clan)");
+                helpMessages.add("&7&m-----------------------------------");
                 helpMessages.forEach(message -> player.sendMessage(StringUtil.format(message)));
             } else {
                 if (args.length == 1) {
@@ -55,19 +56,78 @@ public class ClansCommand implements CommandExecutor {
                     }
                     if (args[0].equalsIgnoreCase("stats")) {
                         List<String> lines = new ArrayList<>();
-                        lines.add("&7&m--------------------------------------------");
-                        lines.add("&9&l" + clanPlayer.getClan().getName() + "'s Stats");
-                        lines.add("&7* &bName: &9" + clanPlayer.getClan().getName());
-                        lines.add("&7* &bPrefix: &9" + clanPlayer.getClan().getPrefix());
-                        lines.add("&7* &bSize: &9" + clanPlayer.getClan().getSize());
-                        lines.add("&7* &bLeader: &9" + clanPlayer.getClan().getLeader());
+                        Clan clan = clanPlayer.getClan();
+                        lines.add("&7&m-----------------------------------");
+                        lines.add("&9&l" + clan.getName() + "'s Stats");
                         lines.add("");
-                        lines.add("&7&m--------------------------------------------");
+                        lines.add("&7* &bName: &9" + clan.getName());
+                        lines.add("&7* &bPrefix: &9" + clan.getPrefix());
+                        lines.add("&7* &bSize: &9" + clan.getSize());
+                        lines.add("&7* &bLeader: &9" + clan.getLeader());
+                        lines.add("");
+                        lines.add("&9PvP Stats");
+                        lines.add("&7* &bKills: &9" + clan.getKills());
+                        lines.add("&7* &bDeaths: &9" + clan.getDeaths());
+                        if (clan.getKills() != 0 || clan.getDeaths() != 0) {
+                            lines.add("&7* &bKDR: &9" + Double.parseDouble(String.valueOf(clan.getKills() / clan.getDeaths())));
+                        } else {
+                            lines.add("&7* &bKDR: &9" + 0.0d);
+                        }
+                        lines.add("&7&m-----------------------------------");
                         lines.forEach(msg -> player.sendMessage(StringUtil.format(msg)));
+                    }
+                    if (args[0].equalsIgnoreCase("roaster")) {
+                            List<String> lines = new ArrayList<>();
+                            lines.add("&7&m-----------------------------------");
+                            for (ClanPlayer members : clanPlayer.getClan().getMembers()) {
+                                lines.add("&7* &9" + members.getPlayer().getName());
+                            }
+                            lines.add("&7&m-----------------------------------");
+                            lines.forEach(msg -> player.sendMessage(StringUtil.format(msg)));
                     }
                     return true;
                 }
                 if (args.length == 2) {
+                    if (args[0].equalsIgnoreCase("stats")) {
+                        String attempt = args[1];
+                        Clan clan = Fall.getInstance().getClanManager().getClan(attempt);
+                        if (clan != null) {
+                            List<String> lines = new ArrayList<>();
+                            lines.add("&7&m-----------------------------------");
+                            lines.add("&9&l" + clan.getName() + "'s Stats");
+                            lines.add("");
+                            lines.add("&7* &bName: &9" + clan.getName());
+                            lines.add("&7* &bPrefix: &9" + clan.getPrefix());
+                            lines.add("&7* &bSize: &9" + clan.getSize());
+                            lines.add("&7* &bLeader: &9" + clan.getLeader());
+                            lines.add("");
+                            lines.add("&9PvP Stats");
+                            lines.add("&7* &bKills: &9" + clan.getKills());
+                            lines.add("&7* &bDeaths: &9" + clan.getDeaths());
+                            if (clan.getKills() != 0 || clan.getDeaths() != 0) {
+                                lines.add("&7* &bKDR: &9" + Double.parseDouble(String.valueOf(clan.getKills() / clan.getDeaths())));
+                            } else {
+                                lines.add("&7* &bKDR: &9" + 0.0d);
+                            }
+                            lines.add("&7&m-----------------------------------");
+                            lines.forEach(msg -> player.sendMessage(StringUtil.format(msg)));
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Clan not found, make sure you type it exact.");
+                        }
+                    }
+                    if (args[0].equalsIgnoreCase("roaster")) {
+                        String attempt = args[1];
+                        Clan clan = Fall.getInstance().getClanManager().getClan(attempt);
+                        if (clan != null) {
+                            List<String> lines = new ArrayList<>();
+                            lines.add("&7&m-----------------------------------");
+                            for (ClanPlayer members : clan.getMembers()) {
+                                lines.add("&7* &9" + members.getPlayer().getName());
+                            }
+                            lines.add("&7&m-----------------------------------");
+                            lines.forEach(msg -> player.sendMessage(StringUtil.format(msg)));
+                        }
+                    }
                     if (args[0].equalsIgnoreCase("invite")) {
                         if (clanPlayer.getLadder() >= 2) {
                             Player target = Bukkit.getPlayer(args[1]);
@@ -143,6 +203,7 @@ public class ClansCommand implements CommandExecutor {
                                 promem.setLadder(0);
                                 promem.setPrefix("null");
                                 promem.setLeader("null");
+                                player.sendMessage(ChatColor.RED + "Clan data may take up to 24hr to be wiped.");
                             }
                             //do last
                             Fall.getInstance().getClanManager().deleteClan(clan);
@@ -157,10 +218,10 @@ public class ClansCommand implements CommandExecutor {
             }
         } else {
             String[] message = new String[] {
-                    "&7&m----------------------------------",
+                    "&7&m-----------------------------------",
                     "&c/clan create <name> <prefix>",
                     "&c/clan join <name>",
-                    "&7&m----------------------------------"
+                    "&7&m-----------------------------------"
 
             };
             if (args.length == 0) {

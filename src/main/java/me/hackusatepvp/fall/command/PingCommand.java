@@ -18,11 +18,11 @@ public class PingCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
         if (args.length == 0) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9&lPing: &7" + ((CraftPlayer)player).getHandle().ping));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Ping: &9" + ((CraftPlayer)player).getHandle().ping));
         } else {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target != null) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&9&lPing: &7" + ((CraftPlayer)target).getHandle().ping));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Ping: &9" + ((CraftPlayer)target).getHandle().ping));
             }
         }
         return false;

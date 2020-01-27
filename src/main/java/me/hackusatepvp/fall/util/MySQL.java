@@ -61,6 +61,18 @@ public class MySQL {
                 con.close();
                 console.sendMessage(StringUtil.format("&7The secure connection to MySQL has &csuccessfully &7been closed."));
             } catch (SQLException e) {
+                Bukkit.getLogger().info(e.getMessage());
+            }
+        }
+    }
+
+    public void disconnectClans() {
+        if (isConnectedClan()) {
+            try {
+                con.close();
+                console.sendMessage(StringUtil.format("&7The secure connection to MySQL has &csuccessfully &7been closed."));
+            } catch (SQLException e) {
+                Bukkit.getLogger().info(e.getMessage());
             }
         }
     }

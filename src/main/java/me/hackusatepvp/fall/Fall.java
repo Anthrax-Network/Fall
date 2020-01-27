@@ -4,6 +4,8 @@ import com.bizarrealex.azazel.Azazel;
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import lombok.Getter;
+import me.hackusatepvp.fall.bounty.BountyManager;
+import me.hackusatepvp.fall.bounty.BountyTimer;
 import me.hackusatepvp.fall.clans.ClanListener;
 import me.hackusatepvp.fall.clans.ClanManager;
 import me.hackusatepvp.fall.clans.ClansCommand;
@@ -19,6 +21,7 @@ import me.hackusatepvp.fall.economy.EconomyManager;
 import me.hackusatepvp.fall.games.GameManager;
 import me.hackusatepvp.fall.games.GameState;
 import me.hackusatepvp.fall.games.GameTimer;
+import me.hackusatepvp.fall.games.PlayerManager;
 import me.hackusatepvp.fall.games.sumo.SumoCommand;
 import me.hackusatepvp.fall.games.sumo.SumoListener;
 import me.hackusatepvp.fall.info.InfoGUI;
@@ -34,6 +37,11 @@ import me.hackusatepvp.fall.scoreboard.BoardLink;
 import me.hackusatepvp.fall.settings.SettingsGUI;
 import me.hackusatepvp.fall.shop.ShopGUI;
 import me.hackusatepvp.fall.shop.ShopListener;
+import me.hackusatepvp.fall.staff.commands.StaffCommand;
+import me.hackusatepvp.fall.staff.commands.VanishCommand;
+import me.hackusatepvp.fall.staff.listeners.StaffItemsListener;
+import me.hackusatepvp.fall.staff.listeners.StaffPatch;
+import me.hackusatepvp.fall.staff.managers.StaffManager;
 import me.hackusatepvp.fall.tab.TabLink;
 import me.hackusatepvp.fall.tags.TagsGUI;
 import me.hackusatepvp.fall.tags.TagsListener;
@@ -52,9 +60,6 @@ import java.util.logging.Logger;
 public final class Fall extends JavaPlugin {
     private final Logger log = Bukkit.getLogger();
     private static Permission perms = null;
-    @Getter
-    private static Fall instance;
-
     private ProfileManager profileManager;
     private InfoGUI infoGUI;
     private InfoManager infoManager;
@@ -75,6 +80,11 @@ public final class Fall extends JavaPlugin {
     private TagsGUI tagsGUI;
     private KitsGUI kitsGUI;
     private ColorGUI colorGUI;
+    private PlayerManager playerManager;
+    private BountyManager bountyManager;
+    private BountyTimer bountyTimer;
+    private StaffManager staffManager;
+    private static Fall instance;
 
     public void onEnable() {
         instance = this;
@@ -109,6 +119,8 @@ public final class Fall extends JavaPlugin {
             log.info("[Fall] Loading scoreboard and tab...");
             getS();
             this.getGameManager().setGameState(GameState.STOP);
+            Fall.getInstance().getBountyTimer().setLeft(60); //300 default
+            Fall.getInstance().getBountyTimer().setRunning(false);
             log.info("[Fall] done!");
         }
     }
@@ -137,15 +149,19 @@ public final class Fall extends JavaPlugin {
         tagsGUI = new TagsGUI();
         kitsGUI = new KitsGUI();
         colorGUI = new ColorGUI();
+        playerManager = new PlayerManager();
+        bountyManager = new BountyManager();
+        bountyTimer = new BountyTimer();
+        staffManager = new StaffManager();
+        bountyTimer.runTaskTimer(this, 0, 20);
     }
 
     public void onDisable() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             this.getProfileManager().unload(player);
         }
-
         mySQL.disconnectProfiles();
-
+        mySQL.disconnectClans();
         instance = null;
     }
 
@@ -159,7 +175,7 @@ public final class Fall extends JavaPlugin {
 
     private void registerListeners() {
         Arrays.asList(new ProfileListener(), new ServerListener(), new InfoGUI(), new DeathEvevnt(), new ChatEvent(), new SettingsGUI(), new QuestListener(), new PlayerListener(), new ClanListener(),
-                new PatchEvent(), new SumoListener(), new ClassesGUI(), new ShopListener(), new TagsListener(), new KitsListener(), new ColorListener())
+                new PatchEvent(), new SumoListener(), new ClassesGUI(), new ShopListener(), new TagsListener(), new KitsListener(), new ColorListener(), new StaffPatch(), new StaffItemsListener())
                 .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
@@ -191,12 +207,14 @@ public final class Fall extends JavaPlugin {
         getCommand("rules").setExecutor(new RulesCommand());
         getCommand("settings").setExecutor(new SettingsCommand());
         getCommand("shop").setExecutor(new ShopCommand());
+        getCommand("staff").setExecutor(new StaffCommand());
         getCommand("stats").setExecutor(new StatsCommand());
         getCommand("sumo").setExecutor(new SumoCommand());
         getCommand("tags").setExecutor(new TagsCommand());
         getCommand("teleport").setExecutor(new TeleportCommand());
         getCommand("togglemessages").setExecutor(new ToggleMessageCommand());
         getCommand("togglescoreboard").setExecutor(new ToggleScoreboardCommand());
+        getCommand("vanish").setExecutor(new VanishCommand());
     }
 
     private boolean setupPermissions() {
@@ -207,5 +225,10 @@ public final class Fall extends JavaPlugin {
 
     public static Permission getPermissions() {
         return perms;
+    }
+
+
+    public static Fall getInstance() {
+        return instance;
     }
 }

@@ -33,6 +33,12 @@ public class SpecialCategory extends Category {
     public Inventory getInventory() {
         Inventory i = Bukkit.createInventory(null, 36, StringUtil.format("&9Special &7Tags"));
         i.setItem(0, Tags.getByName("Christmas").getIcon());
+        i.setItem(1, Tags.getByName("Easter").getIcon());
         return i;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

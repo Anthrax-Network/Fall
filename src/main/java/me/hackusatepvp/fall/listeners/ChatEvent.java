@@ -19,7 +19,7 @@ public class ChatEvent implements Listener {
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
-        if (Fall.getInstance().getClanManager().isNaughtyWord(message.toUpperCase())) {
+        if (Fall.getInstance().getClanManager().isNaughtyWord(message.toLowerCase())) {
             player.sendMessage(ChatColor.RED + "Try to be somewhat nice in chat thanks ;)");
             event.setMessage(null);
             event.setCancelled(true);
@@ -43,7 +43,7 @@ public class ChatEvent implements Listener {
                                 online.sendMessage(StringUtil.format("&7[&b" + clanPlayer.getClan().getPrefix() + "&7] " + Quest.getByName(profile.getDonor()).getPrefix() + " " + profile.getColor() + player.getName() + " &8» " + event.getMessage()));
                             }
                         } else {
-                            if (profile.getDonor().equals("starter ")) {
+                            if (profile.getDonor().equals("starter")) {
                                 online.sendMessage(StringUtil.format("&7[&b" + clanPlayer.getClan().getPrefix() + "&7] " + Quest.getByName(profile.getActiveQuest()).getPrefix() + " " + Tags.getByName(profile.getTag()).getPrefix() + " " + profile.getColor() + player.getName() + " &8» " + event.getMessage()));
                             } else {
                                 online.sendMessage(StringUtil.format("&7[&b" + clanPlayer.getClan().getPrefix() + "&7] " + Quest.getByName(profile.getDonor()).getPrefix() + " " + Tags.getByName(profile.getTag()).getPrefix() + " " + profile.getColor() + player.getName() + " &8» " + event.getMessage()));

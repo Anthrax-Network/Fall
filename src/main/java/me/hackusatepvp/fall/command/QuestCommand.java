@@ -4,6 +4,7 @@ import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.profile.Profile;
 import me.hackusatepvp.fall.quests.Quest;
 import me.hackusatepvp.fall.util.StringUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -53,7 +54,20 @@ public class QuestCommand implements CommandExecutor {
                 profile.setActiveQuest(Quest.STARTER_QUEST.getName());
             }
         } else {
-
+            Player target = Bukkit.getPlayerExact(args[0]);
+            if (target != null) {
+                Profile tar = Fall.getInstance().getProfileManager().getProfile(target.getUniqueId());
+                if (tar.getActiveQuest() != null) {
+                    List<String> lines = new ArrayList<>();
+                    lines.add("&7&m--------------------------------------------");
+                    lines.add("&4* &7Quest: &c" + Quest.getByName(tar.getActiveQuest()).getName());
+                    lines.add("&4* &7Goal: &c" + Quest.getByName(tar.getActiveQuest()).getGoal());
+                    lines.add("&4* &7Progress: &c" + Quest.getByName(tar.getActiveQuest()).getProgress(tar));
+                    lines.add("&4* &7Next Rank: &c" + Quest.getByName(tar.getActiveQuest()).getNext(tar).getName());
+                    lines.add("&7&m--------------------------------------------");
+                    lines.forEach(quest -> player.sendMessage(StringUtil.format(quest)));
+                }
+            }
         }
         return false;
     }

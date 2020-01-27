@@ -33,6 +33,14 @@ public class RareCategory extends Category {
     public Inventory getInventory() {
         Inventory i = Bukkit.createInventory(null, 9, StringUtil.format("&7* &bRare Tags"));
         i.setItem(0, Tags.getByName(StringUtil.format("&bHero &7Tag")).getIcon());
+        i.setItem(1, Tags.getByName(StringUtil.format("&cKiller &7Tag")).getIcon());
+        i.setItem(2, Tags.getByName(StringUtil.format("Shrug")).getIcon());
+        i.setItem(3, Tags.getByName(StringUtil.format("&5Villain &7Tag")).getIcon());
         return i;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

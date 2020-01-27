@@ -102,7 +102,7 @@ public class ClanManager {
     }
 
     public void deleteClan(Clan clan) {
-        final String SELECT = "DELETE FROM `clans` WHERE `uuid` = " + clan.getUuid();
+        final String SELECT = "DELETE FROM `clans` WHERE `clans`.`UUID` =" + clan.getUuid();
         Bukkit.getScheduler().runTaskAsynchronously(Fall.getInstance(), () -> {
             try {
                 PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement(SELECT);

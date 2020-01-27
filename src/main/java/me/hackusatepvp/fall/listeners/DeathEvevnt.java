@@ -43,7 +43,15 @@ public class DeathEvevnt implements Listener {
                     //Checking to see who has kill messages enabled
                     if (Fall.getInstance().getProfileManager().getProfile(online.getUniqueId()).isKillmsg()) {
                         //sending the chat message to those who have kill messages enabled
-                        online.sendMessage(StringUtil.format("&c&l" + player.getName() + " &7has died to &b&l" + killer.getName()));
+                        if (!Fall.getInstance().getBountyManager().hasBounty(player.getUniqueId())) {
+                            online.sendMessage(StringUtil.format("&c&l" + player.getName() + " &7has died to &b&l" + killer.getName()));
+                        } else {
+                            online.sendMessage(StringUtil.format("&c&l" + killer.getName() + " &7has claimed the 500$ bounty on &4" + player.getName()));
+                            Fall.getInstance().getEconomyManager().addBalance(prokiller, 500d);
+                            Fall.getInstance().getBountyManager().removeBounty(player.getUniqueId());
+                            Fall.getInstance().getBountyTimer().setLeft(300);
+                            Fall.getInstance().getBountyTimer().setRunning(false);
+                        }
                     }
                 }
                 prokiller.setKills(prokiller.getKills() + 1);
@@ -57,10 +65,11 @@ public class DeathEvevnt implements Listener {
                         return;
                     }
                 }
+                player.setExp(profile.getXp());
+                player.setLevel(profile.getLevel());
                 //ends the method completely
                 Quest quest = Quest.getByName(Fall.getInstance().getProfileManager().getProfile(killer.getUniqueId()).getActiveQuest());
                 if (quest != null) {
-                    Bukkit.getLogger().info("QUEST WORKED!");
                     quest.onKill(killer, player, event);
                 }
                 if (Fall.getInstance().getCombatManager().inCombat(player)) {

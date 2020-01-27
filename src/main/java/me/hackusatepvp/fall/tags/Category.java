@@ -36,4 +36,6 @@ public abstract class Category {
 
     public abstract Inventory getInventory();
 
+    public abstract boolean isEnabled();
+
 }

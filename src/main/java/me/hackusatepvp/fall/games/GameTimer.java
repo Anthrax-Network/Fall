@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Iterator;
 
 public class GameTimer extends BukkitRunnable {
+    @Getter @Setter private boolean started;
     @Getter @Setter private int left;
     @Getter private int total = 120;
     @Getter @Setter String player1;
@@ -53,6 +54,7 @@ public class GameTimer extends BukkitRunnable {
             Bukkit.getOnlinePlayers().forEach(instance -> instance.sendMessage(StringUtil.format("&cNot enough players joined the event. Event has been cancelled.")));
             Fall.getInstance().getGameManager().getGame().forEach(player -> Fall.getInstance().getGameManager().getGame().remove(player));
             this.cancel();
+            started = false;
             Fall.getInstance().getGameManager().setGameState(GameState.STOP);
         }
     }
@@ -61,36 +63,66 @@ public class GameTimer extends BukkitRunnable {
     public void run() {
         --left;
         if (Fall.getInstance().getGameManager().getGameState() == GameState.STOP) {
+            started = false;
             this.cancel();
         } else if (Fall.getInstance().getGameManager().getGameState() == GameState.WAITING) {
-            this.broadCastTotal();
-            if (left == 0) {
-                if (Fall.getInstance().getGameManager().getGame().size() < 2) {
-                    Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&cThe game has been cancelled due to the lack of players.")));
-                    Fall.getInstance().getGameManager().getGame().forEach(player -> Fall.getInstance().getGameManager().getGame().remove(player));
-                    this.cancel();
-                    return;
-                }
-                Iterator iterator = Fall.getInstance().getGameManager().getGame().iterator();
-                int count = 0;
-                while (iterator.hasNext()) {
-                    Player player = (Player) iterator.next();
-                    count++;
-                    if (count == 1) {
-                        player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.First.x"), Fall.getInstance().getConfig().getInt("Sumo.Arena.First.y"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.First.z"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.First.pitch"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.First.yaw")));
-                        setPlayer1(player.getName());
-                    } else if (count == 2) {
-                        player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.Second.x"), Fall.getInstance().getConfig().getInt("Sumo.Arena.Second.y"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.Second.z"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.Second.pitch"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.Second.yaw")));
-                        setPlayer2(player.getName());
-                    } else {
-                        player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
-                                Fall.getInstance().getConfig().getFloat("Sumo.Lobby.pitch"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.yaw")));
+            if (!started) {
+                this.broadCastTotal();
+                if (left == 0) {
+                    if (Fall.getInstance().getGameManager().getGame().size() < 2) {
+                        Fall.getInstance().getGameManager().getGame().forEach(instance -> instance.sendMessage(StringUtil.format("&cThe game has been cancelled due to the lack of players.")));
+                        Fall.getInstance().getGameManager().getGame().forEach(player -> Fall.getInstance().getGameManager().getGame().remove(player));
+                        Fall.getInstance().getGameManager().setGameState(GameState.STOP);
+                        this.cancel();
+                        return;
                     }
+                    Iterator iterator = Fall.getInstance().getGameManager().getGame().iterator();
+                    int count = 0;
+                    while (iterator.hasNext()) {
+                        Player player = (Player) iterator.next();
+                        count++;
+                        if (count == 1) {
+                            player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.First.x"), Fall.getInstance().getConfig().getInt("Sumo.Arena.First.y"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.First.z"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.First.pitch"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.First.yaw")));
+                            setPlayer1(player.getName());
+                        } else if (count == 2) {
+                            player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.Second.x"), Fall.getInstance().getConfig().getInt("Sumo.Arena.Second.y"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.Second.z"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.Second.pitch"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.Second.yaw")));
+                            setPlayer2(player.getName());
+                        } else {
+                            player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
+                                    Fall.getInstance().getConfig().getFloat("Sumo.Lobby.pitch"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.yaw")));
+                        }
+                    }
+                    Fall.getInstance().getGameManager().setGameState(GameState.STARTING);
+                    left = 12;
                 }
-                Fall.getInstance().getGameManager().setGameState(GameState.STARTING);
-                left = 12;
+            } else {
+                if (left == 0) {
+                    if (Fall.getInstance().getGameManager().getGame().size() < 2) {
+                        this.cancel();
+                        return;
+                    }
+                    Iterator iterator = Fall.getInstance().getGameManager().getGame().iterator();
+                    int count = 0;
+                    while (iterator.hasNext()) {
+                        Player player = (Player) iterator.next();
+                        count++;
+                        if (count == 1) {
+                            player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.First.x"), Fall.getInstance().getConfig().getInt("Sumo.Arena.First.y"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.First.z"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.First.pitch"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.First.yaw")));
+                            setPlayer1(player.getName());
+                        } else if (count == 2) {
+                            player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.Second.x"), Fall.getInstance().getConfig().getInt("Sumo.Arena.Second.y"), Fall.getInstance().getConfig().getDouble("Sumo.Arena.Second.z"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.Second.pitch"), Fall.getInstance().getConfig().getFloat("Sumo.Arena.Second.yaw")));
+                            setPlayer2(player.getName());
+                        } else {
+                            player.teleport(new Location(Bukkit.getWorld("world"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.x"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.y"), Fall.getInstance().getConfig().getDouble("Sumo.Lobby.z"),
+                                    Fall.getInstance().getConfig().getFloat("Sumo.Lobby.pitch"), Fall.getInstance().getConfig().getInt("Sumo.Lobby.yaw")));
+                        }
+                    }
+                    Fall.getInstance().getGameManager().setGameState(GameState.STARTING);
+                    left = 12;
+                }
             }
         } else if (Fall.getInstance().getGameManager().getGameState() == GameState.STARTING) {
+            started = true;
             if (left == 10) {
                 Bukkit.getPlayer(player1).sendMessage(StringUtil.format("&7Starting in &910s"));
                 Bukkit.getPlayer(player2).sendMessage(StringUtil.format("&7Starting in &910s"));
@@ -146,7 +178,7 @@ public class GameTimer extends BukkitRunnable {
                     while (iterator.hasNext()) {
                         //we remove 1 player to make it even.
                         Player player = (Player) iterator.next();
-                        player.sendMessage(ChatColor.RED + "You were removed from the event because it requires a even number.");
+                        player.sendMessage(ChatColor.RED + "You were removed from the event because it requires an even number.");
                         Fall.getInstance().getGameManager().getGame().remove(player);
                     }
                     if (Fall.getInstance().getGameManager().getGame().size() % 2 == 0) {

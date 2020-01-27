@@ -3,13 +3,19 @@ package me.hackusatepvp.fall.games;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class GameManager {
     @Setter @Getter private String name;
 
-    @Getter private  HashSet<Player> game = new HashSet<>();
+    @Getter private HashSet<Player> game = new HashSet<>();
+
+    @Getter private HashMap<Player, ItemStack[]> playerinvs = new HashMap<>();
+    @Getter private HashMap<Player, ItemStack[]> playerArmour = new HashMap<>();
 
     private int gameState;
 

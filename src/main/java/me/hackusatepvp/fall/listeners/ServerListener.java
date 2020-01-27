@@ -1,11 +1,12 @@
 package me.hackusatepvp.fall.listeners;
 
 import me.hackusatepvp.fall.Fall;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+
+import static me.hackusatepvp.fall.util.StringUtil.format;
 
 public class ServerListener implements Listener {
 
@@ -72,12 +73,13 @@ public class ServerListener implements Listener {
         if (command.toLowerCase().equalsIgnoreCase("/version") || command.equalsIgnoreCase("/ver") || command.equalsIgnoreCase("/bukkit:version") || command.equalsIgnoreCase("/bukkit:ver") || command.contains("/version") || command.contains("/ver") || command.contains("/bukkit:version") || command.contains("/bukkit:ver")) {
             event.setCancelled(true);
             player.sendMessage(format("&7&m--------------------------------------------"));
-            player.sendMessage(format("&7The server is running &4FateKits &cversion: &7" + Fall.getInstance().getDescription().getVersion()));
+            player.sendMessage(format("&4&lFateKits &7version: " + Fall.getInstance().getDescription().getVersion()));
+            player.sendMessage("");
+            player.sendMessage(format("&cDevelopment: &7Hackusate_PvP, iKenny"));
+            player.sendMessage(format("&cLast Tested: &71/22/2020"));
+            player.sendMessage(format("&cDevelopment Stage: &7Alpha"));
             player.sendMessage(format("&7&m--------------------------------------------"));
         }
     }
 
-    public String format(String s) {
-        return ChatColor.translateAlternateColorCodes('&', s);
-    }
 }
