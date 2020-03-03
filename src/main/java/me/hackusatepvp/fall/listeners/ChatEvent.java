@@ -57,7 +57,7 @@ public class ChatEvent implements Listener {
                 for (Player online : Bukkit.getOnlinePlayers()) {
                     ClanPlayer onlinePlayer = Fall.getInstance().getClanManager().getClanPlayer(online);
                     if (onlinePlayer.getClan().getName().equals(clanPlayer.getClan().getName())) {
-                        online.sendMessage(StringUtil.format("&8[&3" + clanPlayer.getRank() + "&8] &c" + profile.getNick() + "&f: &7" + event.getMessage()));
+                        online.sendMessage(StringUtil.format("&8[&3" + clanPlayer.getRank() + "&8] &c" + profile.getName() + "&f: &7" + event.getMessage()));
                     }
                 }
             }

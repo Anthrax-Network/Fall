@@ -10,8 +10,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class PurpleColor extends Color {
+
     public PurpleColor() {
-        super("&7* &dPruple");
+        super(StringUtil.format("&7* &dPurple"));
     }
 
     @Override
@@ -26,9 +27,9 @@ public class PurpleColor extends Color {
 
     @Override
     public ItemStack getIcon() {
-        ItemStack itemStack = new ItemStack(Material.INK_SACK, 1, (byte) 5);
+        ItemStack itemStack = new ItemStack(Material.INK_SACK, 1, (byte) 13);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(StringUtil.format("&7* &9Blue"));
+        itemMeta.setDisplayName(StringUtil.format("&7* &dPurple"));
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

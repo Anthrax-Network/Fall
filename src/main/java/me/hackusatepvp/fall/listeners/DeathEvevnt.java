@@ -43,14 +43,13 @@ public class DeathEvevnt implements Listener {
                     //Checking to see who has kill messages enabled
                     if (Fall.getInstance().getProfileManager().getProfile(online.getUniqueId()).isKillmsg()) {
                         //sending the chat message to those who have kill messages enabled
-                        if (!Fall.getInstance().getBountyManager().hasBounty(player.getUniqueId())) {
+                        if (!profile.isBounty()) {
                             online.sendMessage(StringUtil.format("&c&l" + player.getName() + " &7has died to &b&l" + killer.getName()));
                         } else {
-                            online.sendMessage(StringUtil.format("&c&l" + killer.getName() + " &7has claimed the 500$ bounty on &4" + player.getName()));
-                            Fall.getInstance().getEconomyManager().addBalance(prokiller, 500d);
-                            Fall.getInstance().getBountyManager().removeBounty(player.getUniqueId());
-                            Fall.getInstance().getBountyTimer().setLeft(300);
-                            Fall.getInstance().getBountyTimer().setRunning(false);
+                            online.sendMessage(StringUtil.format("&c&l" + killer.getName() + " &7has claimed the " + Fall.getInstance().getBountyManager().getBounty(player) + " bounty on &4" + player.getName()));
+                            Fall.getInstance().getEconomyManager().addBalance(prokiller, Fall.getInstance().getBountyManager().getBounty(player));
+                            profile.setBounty(false);
+                            Fall.getInstance().getBountyManager().setBounty(player, false, 0);
                         }
                     }
                 }

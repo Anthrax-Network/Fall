@@ -17,9 +17,9 @@ public class Profile {
     private final UUID uuid;
     private String chatype;
     private String name, invites, quest, nick, clan, clanrank, leader, prefix, tag, color;
-    private double kdr;
+    private double kdr, bountyamount;
     private int kills, deaths, killstreak, level, xp, ladder;
-    private boolean tablist, killmsg, chat, scoreboard, staff, messages, messagesound;
+    private boolean tablist, killmsg, chat, scoreboard, staff, messages, messagesound, bounty, god;
     private String donor;
     private String boardstyle, tabtype;
     private String activeQuest, activeClass;

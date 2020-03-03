@@ -22,7 +22,7 @@ public class ListCommand implements CommandExecutor {
         //todo vanish
         List<String> lines = new ArrayList<>();
         lines.add("&7&m--------------------------------------");
-        lines.add( "&7There are &9" + getOnline());
+        lines.add( "&7There are &9" + getOnline() + " &7staff online.");
         lines.add("");
         lines.add("&9Online Staff:");
         if (Fall.getInstance().getStaffManager().getStaff().size() == 0) {
@@ -39,8 +39,8 @@ public class ListCommand implements CommandExecutor {
                 }
             }
         }
-        lines.forEach(msg -> sender.sendMessage(StringUtil.format(msg)));
         lines.add("&7&m--------------------------------------");
+        lines.forEach(msg -> sender.sendMessage(StringUtil.format(msg)));
         return false;
     }
 

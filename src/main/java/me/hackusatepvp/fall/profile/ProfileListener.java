@@ -76,6 +76,14 @@ public class ProfileListener implements Listener {
     @EventHandler
     public void onDisconnect(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+        Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
+        if (profile.isStaff()) {
+            if (Fall.getInstance().getStaffManager().isStaffMode(player)) {
+                player.getInventory().setContents(Fall.getInstance().getStaffManager().getInventory().get(player));
+                player.getInventory().setArmorContents(Fall.getInstance().getStaffManager().getArmor().get(player));
+                Fall.getInstance().getStaffManager().removeStaffMode(player);
+            }
+        }
         Fall.getInstance().getProfileManager().unload(player);
 
     }

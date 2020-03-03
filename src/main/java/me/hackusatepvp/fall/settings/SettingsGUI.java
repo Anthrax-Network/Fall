@@ -106,12 +106,12 @@ public class SettingsGUI implements Listener {
                         event.setCancelled(true);
                         if (event.getCurrentItem().hasItemMeta()) {
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getChat(player).getItemMeta().getDisplayName())) {
-                                if (profile.isChat()) profile.setChat(true);
-                                else profile.setChat(false);
+                                profile.setChat(profile.isChat() ? false : true);
+                                player.sendMessage(StringUtil.format("&7Your chat is now " + profile.isChat()));
                             }
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getTablist(player).getItemMeta().getDisplayName())) {
-                                if (profile.isTablist()) profile.setTablist(true);
-                                else profile.setTablist(false);
+                                profile.setTablist(profile.isTablist() ? false : true);
+                                player.sendMessage(StringUtil.format("&7Your tablist is now " + profile.isTablist()));
                                 // that's a ternary operator, it's like a simplified if statement ---> thing ? when it's true : when it's false
                                // profile.setScoreboard(profile.isScoreboard() ? false : true);
                             }
@@ -119,57 +119,68 @@ public class SettingsGUI implements Listener {
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getScoreboard(player).getItemMeta().getDisplayName())) {
                                 if (profile.getBoardstyle().equalsIgnoreCase("blue")) {
                                     profile.setBoardstyle("red");
+                                    player.sendMessage(StringUtil.format("&7Your scoreboard is now &cred"));
                                 } else if (profile.getBoardstyle().equalsIgnoreCase("red")) {
                                     profile.setBoardstyle("green");
+                                    player.sendMessage(StringUtil.format("&7Your scoreboard is now &agreen"));
                                 } else if (profile.getBoardstyle().equalsIgnoreCase("green")) {
                                     profile.setBoardstyle("white");
+                                    player.sendMessage(StringUtil.format("&7Your scoreboard is now &fwhite"));
                                 } else if (profile.getBoardstyle().equalsIgnoreCase("white")) {
                                     profile.setBoardstyle("blue");
+                                    player.sendMessage(StringUtil.format("&7Your scoreboard is now &9blue"));
                                 }
                             }
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getTabStyle(player).getItemMeta().getDisplayName())) {
                                 if (profile.getTabtype().equalsIgnoreCase("blue")) {
                                     profile.setTabtype("red");
+                                    player.sendMessage(StringUtil.format("&7Your tab is now &cred"));
                                 } else if (profile.getTabtype().equalsIgnoreCase("red")) {
                                     profile.setTabtype("green");
+                                    player.sendMessage(StringUtil.format("&7Your tab is now &agreen"));
                                 } else if (profile.getTabtype().equalsIgnoreCase("green")) {
                                     profile.setTabtype("white");
+                                    player.sendMessage(StringUtil.format("&7Your tab is now &fwhite"));
                                 } else if (profile.getTabtype().equalsIgnoreCase("white")) {
                                     profile.setTabtype("blue");
+                                    player.sendMessage(StringUtil.format("&7Your tab is now &9blue"));
                                 }
                             }
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getBoard(player).getItemMeta().getDisplayName())) {
-                                if (profile.isStaff()) profile.setScoreboard(true);
-                                else profile.setScoreboard(false);
+                                profile.setScoreboard(profile.isScoreboard() ? false : true);
                             }
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getChatType(player).getItemMeta().getDisplayName())) {
                                 if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
                                      if (profile.isStaff()) {
                                          if (profile.getChatype().equals("public")) {
+                                             player.sendMessage(StringUtil.format("&7You are now speaking in &9clan chat."));
                                              profile.setChatype("clan");
-                                         } else if (profile.getChatype().equals("clan")) {
+                                         } if (profile.getChatype().equals("clan")) {
                                              profile.setChatype("staff");
-                                         } else {
-                                             profile.setChatype("public");
+                                             player.sendMessage(StringUtil.format("&7You are now speaking in &4staff chat."));
+                                         } if (profile.getChatype().equalsIgnoreCase("staff")) {
+                                             player.sendMessage(StringUtil.format("&7You are now speaking in &apublic chat."));
                                          }
                                          return;
                                      }
                                      if (profile.getChatype().equals("public")) {
                                          profile.setChatype("clan");
+                                         player.sendMessage(StringUtil.format("&7You are now speaking in &9clan chat."));
                                      } else {
                                          profile.setChatype("public");
+                                         player.sendMessage(StringUtil.format("&7You are now speaking in &apublic chat."));
                                      }
                                 } else {
                                     player.sendMessage(ChatColor.RED + "You only have the \"public\" setting available.");
                                 }
                             }
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getMessages(player).getItemMeta().getDisplayName())) {
-                                if (profile.isMessages()) profile.setMessages(true);
-                                else profile.setMessages(false);
+                                profile.setMessages(profile.isMessages() ? false : true);
+                                player.sendMessage(StringUtil.format("&7Your messages is now " + profile.isMessages()));
                             }
                             if (event.getCurrentItem().getItemMeta().getDisplayName().equals(getMessageSounds(player).getItemMeta().getDisplayName())) {
-                                if (profile.isMessagesound()) profile.setMessages(true);
-                                else profile.setMessages(false);
+                                profile.setMessagesound(profile.isMessagesound() ? false : true);
+                                player.sendMessage(StringUtil.format("&7Your message-sounds is now " + profile.isMessages()));
                             }
                         }
                         //next

@@ -203,8 +203,8 @@ public class ClansCommand implements CommandExecutor {
                                 promem.setLadder(0);
                                 promem.setPrefix("null");
                                 promem.setLeader("null");
-                                player.sendMessage(ChatColor.RED + "Clan data may take up to 24hr to be wiped.");
                             }
+                            player.sendMessage(ChatColor.RED + "Clan data may take up to 24hr to be wiped.");
                             //do last
                             Fall.getInstance().getClanManager().deleteClan(clan);
                         } else {

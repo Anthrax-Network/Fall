@@ -1,7 +1,6 @@
 package me.hackusatepvp.fall.command;
 
 import me.hackusatepvp.fall.Fall;
-import me.hackusatepvp.fall.info.Info;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

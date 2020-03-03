@@ -1,27 +1,28 @@
 package me.hackusatepvp.fall.bounty;
-import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import me.hackusatepvp.fall.Fall;
+import me.hackusatepvp.fall.profile.Profile;
+import org.bukkit.entity.Player;
 
 public class BountyManager {
 
-    @Getter private Map<UUID, Bounty> bounties = new HashMap<>();
-
-    public void addBounty(UUID uuid, Bounty bounty) {
-        bounties.put(uuid, bounty);
+    public void setBounty(Player player, boolean status, double amount) {
+        Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
+        if (profile.isBounty()) {
+            return;
+        }
+        profile.setBounty(status);
+        if (status) {
+            profile.setBountyamount(amount);
+            Fall.getInstance().saveConfig();
+        }
     }
 
-    public Bounty getBounty(UUID uuid) {
-        return bounties.get(uuid);
-    }
-
-    public boolean hasBounty(UUID uuid) {
-        return bounties.containsKey(uuid);
-    }
-
-    public void removeBounty(UUID uuid) {
-        bounties.remove(uuid);
+    public Double getBounty(Player player) {
+        Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
+        if (!profile.isBounty()) {
+            return 0.0;
+        }
+        return profile.getBountyamount();
     }
 }

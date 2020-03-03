@@ -2,9 +2,9 @@ package me.hackusatepvp.fall.staff.managers;
 
 import lombok.Getter;
 import me.hackusatepvp.fall.Fall;
-import me.hackusatepvp.fall.bounty.Bounty;
 import me.hackusatepvp.fall.staff.Staff;
 import me.hackusatepvp.fall.util.StringUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -19,6 +19,7 @@ public class StaffManager {
     @Getter private HashSet<Player> vanish = new HashSet<>();
     @Getter private Map<Player, ItemStack[]> inventory = new HashMap<>();
     @Getter private Map<Player, ItemStack[]> armor = new HashMap<>();
+    @Getter private HashSet<Player> hidestaff = new HashSet<>();
 
     public void setStaffMode(Player player) {
         staffmode.add(player);
@@ -57,6 +58,24 @@ public class StaffManager {
             itemMeta.setDisplayName(StringUtil.format("&7* &9Vanish: &7" + Fall.getInstance().getStaffManager().isVanish(player)));
             itemStack.setItemMeta(itemMeta);
             return itemStack;
+        }
+    }
+
+    public void setHiden(Player player, boolean b) {
+        if (b) {
+            hidestaff.add(player);
+            for (Player online : Bukkit.getOnlinePlayers()) {
+                if (isStaff(online.getUniqueId())) {
+                    player.hidePlayer(online);
+                }
+            }
+        } else {
+            hidestaff.remove(player);
+            for (Player online : Bukkit.getOnlinePlayers()) {
+                if (isStaff(online.getUniqueId())) {
+                    player.showPlayer(online);
+                }
+            }
         }
     }
 

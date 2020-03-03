@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ProfileManager {
-    private final String INSERT = "INSERT INTO profiles VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String INSERT = "INSERT INTO profiles VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     @Getter
     Fall instance;
 
@@ -35,7 +35,7 @@ public class ProfileManager {
         Profile playerProfile = new Profile(player.getUniqueId());
         profiles.put(player.getUniqueId(), playerProfile);
         Fall.getInstance().getProfileManager().addProfile(player.getUniqueId(), playerProfile);
-        final String SELECT = "SELECT NAME, BOARDSTYLE, ACTIVEQUEST, QUEST, SCOREBOARD, CHAT, TAB, TABSTYLE, KILLS, DEATHS, KILLSTREAK, LEVEL, XP, DONOR, CLAN, CLANRANK, LADDER, INVITES, LEADER, PREFIX, CHATTYPE, BALANCE, STAFF, NICK, MESSAGES, MESSAGESOUNDS, ACTIVECLASS, TAG, COLOR FROM profiles WHERE UUID=?";
+        final String SELECT = "SELECT NAME, BOARDSTYLE, ACTIVEQUEST, QUEST, SCOREBOARD, CHAT, TAB, TABSTYLE, KILLS, DEATHS, KILLSTREAK, LEVEL, XP, DONOR, CLAN, CLANRANK, LADDER, INVITES, LEADER, PREFIX, CHATTYPE, BALANCE, STAFF, NICK, MESSAGES, MESSAGESOUNDS, ACTIVECLASS, TAG, COLOR, BOUNTY, BOUNTYAMOUNT, GOD FROM profiles WHERE UUID=?";
 
         Bukkit.getScheduler().runTaskAsynchronously(Fall.getInstance(), () -> {
             try {
@@ -73,7 +73,9 @@ public class ProfileManager {
                     playerProfile.setActiveClass(rs.getString("ACTIVECLASS"));
                     playerProfile.setTag(rs.getString("TAG"));
                     playerProfile.setColor(rs.getString("COLOR"));
-
+                    playerProfile.setBounty(rs.getBoolean("BOUNTY"));
+                    playerProfile.setBountyamount(rs.getDouble("BOUNTYAMOUNT"));
+                    playerProfile.setGod(rs.getBoolean("GOD"));
                 }
 
             } catch (SQLException e) {
@@ -86,7 +88,7 @@ public class ProfileManager {
         Profile playerProfile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
 
         try {
-            PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE profiles SET NAME = ? , BOARDSTYLE  = ? , QUEST = ? , ACTIVEQUEST = ?, SCOREBOARD = ? , CHAT = ?, TAB = ? , TABSTYLE = ? , KILLS = ? , DEATHS = ? , KILLSTREAK = ? , LEVEL = ? , XP = ?, DONOR = ?, CLAN = ?, CLANRANK = ?, LADDER =? , INVITES =? , LEADER = ?, PREFIX = ?, CHATTYPE = ?, BALANCE = ?, STAFF = ?, NICK =?, MESSAGES =?, MESSAGESOUNDS =?, ACTIVECLASS =?, TAG =?, COLOR =? WHERE UUID = ?");
+            PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE profiles SET NAME = ? , BOARDSTYLE  = ? , QUEST = ? , ACTIVEQUEST = ?, SCOREBOARD = ? , CHAT = ?, TAB = ? , TABSTYLE = ? , KILLS = ? , DEATHS = ? , KILLSTREAK = ? , LEVEL = ? , XP = ?, DONOR = ?, CLAN = ?, CLANRANK = ?, LADDER =? , INVITES =? , LEADER = ?, PREFIX = ?, CHATTYPE = ?, BALANCE = ?, STAFF = ?, NICK =?, MESSAGES =?, MESSAGESOUNDS =?, ACTIVECLASS =?, TAG =?, COLOR =?, BOUNTY =?, BOUNTYAMOUNT =?, GOD =? WHERE UUID = ?");
             preparedStatement.setString(1, player.getName());
             preparedStatement.setString(2, playerProfile.getBoardstyle());
             preparedStatement.setString(3, playerProfile.getQuest());
@@ -116,7 +118,10 @@ public class ProfileManager {
             preparedStatement.setString(27, playerProfile.getActiveClass());
             preparedStatement.setString(28, playerProfile.getTag());
             preparedStatement.setString(29, playerProfile.getColor());
-            preparedStatement.setString(30, player.getUniqueId().toString());
+            preparedStatement.setBoolean(30, playerProfile.isBounty());
+            preparedStatement.setDouble(31, playerProfile.getBountyamount());
+            preparedStatement.setBoolean(32, playerProfile.isGod());
+            preparedStatement.setString(33, player.getUniqueId().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -202,6 +207,9 @@ public class ProfileManager {
                 preparedStatement.setString(28, "null");
                 preparedStatement.setString(29, "null");
                 preparedStatement.setString(30, "&7");
+                preparedStatement.setBoolean(31,false);
+                preparedStatement.setDouble(32, 0.00);
+                preparedStatement.setBoolean(33, false);
                 preparedStatement.execute();
                 preparedStatement.executeUpdate();
                 Fall.getInstance().getProfileManager().load(player);

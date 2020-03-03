@@ -12,7 +12,6 @@ public class ColorGUI {
         i.setItem(1, Color.getByName(StringUtil.format("&7* &cRed")).getIcon());
         i.setItem(2, Color.getByName(StringUtil.format("&7* &aGreen")).getIcon());
         i.setItem(3, Color.getByName(StringUtil.format("&7* &eYellow")).getIcon());
-        i.setItem(4, Color.getByName(StringUtil.format("&7* &dPurple")).getIcon());
         return i;
     }
 }

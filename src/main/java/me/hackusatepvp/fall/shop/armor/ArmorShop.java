@@ -149,9 +149,9 @@ public class ArmorShop extends Shop {
         Inventory i = Bukkit.createInventory(null, 18, StringUtil.format("&9Armor Shop"));
         i.setItem(0, getIronHelmet());
         i.setItem(1, getIronChestPlate());
-        i.setItem(2, getDiamondLegs());
-        i.setItem(3, getIronLegs());
-        i.setItem(4, getIronBoots());
+        i.setItem(2, getIronLegs());
+        i.setItem(3, getIronBoots());
+        i.setItem(4, getDiamondHelmet());
         i.setItem(5, getDiamondChestPlate());
         i.setItem(6, getDiamondLegs());
         i.setItem(7, getDiamondBoots());

@@ -17,13 +17,13 @@ public class InfoGUI implements Listener {
 
     public Inventory getInfoGUI(Player player) {
         Inventory i = Bukkit.createInventory(null, 9, "MESSAGE");
-        Info profile = Fall.getInstance().getInfoManager().getInfo(player.getUniqueId());
+
 
         ItemStack name = new ItemStack(Material.PAPER);
 
         ItemMeta namem = name.getItemMeta();
 
-        namem.setDisplayName(ChatColor.RED + profile.getName());
+        namem.setDisplayName(ChatColor.RED + player.getName());
 
         name.setItemMeta(namem);
 
@@ -39,6 +39,7 @@ public class InfoGUI implements Listener {
                 if (event.getClickedInventory() != null) {
                     if (event.getClickedInventory().getName().equalsIgnoreCase("MESSAGE")) {
                         event.setCancelled(true);
+
                     }
                 }
             }

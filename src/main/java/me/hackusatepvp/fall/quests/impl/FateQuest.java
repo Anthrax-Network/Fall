@@ -34,7 +34,7 @@ public class FateQuest extends Quest {
 
     @Override
     public int getGoal() {
-        return 480;
+        return 7680;
     }
 
     @Override

@@ -4,8 +4,9 @@ import com.bizarrealex.azazel.Azazel;
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import lombok.Getter;
+import me.hackusatepvp.fall.bounty.BountyCommand;
+import me.hackusatepvp.fall.bounty.BountyListCommand;
 import me.hackusatepvp.fall.bounty.BountyManager;
-import me.hackusatepvp.fall.bounty.BountyTimer;
 import me.hackusatepvp.fall.clans.ClanListener;
 import me.hackusatepvp.fall.clans.ClanManager;
 import me.hackusatepvp.fall.clans.ClansCommand;
@@ -17,6 +18,7 @@ import me.hackusatepvp.fall.colors.ColorListener;
 import me.hackusatepvp.fall.combat.CombatManager;
 import me.hackusatepvp.fall.combat.CombatTask;
 import me.hackusatepvp.fall.command.*;
+import me.hackusatepvp.fall.configs.BountyConfiguration;
 import me.hackusatepvp.fall.economy.EconomyManager;
 import me.hackusatepvp.fall.games.GameManager;
 import me.hackusatepvp.fall.games.GameState;
@@ -37,6 +39,7 @@ import me.hackusatepvp.fall.scoreboard.BoardLink;
 import me.hackusatepvp.fall.settings.SettingsGUI;
 import me.hackusatepvp.fall.shop.ShopGUI;
 import me.hackusatepvp.fall.shop.ShopListener;
+import me.hackusatepvp.fall.staff.commands.HideStaffCommand;
 import me.hackusatepvp.fall.staff.commands.StaffCommand;
 import me.hackusatepvp.fall.staff.commands.VanishCommand;
 import me.hackusatepvp.fall.staff.listeners.StaffItemsListener;
@@ -47,6 +50,7 @@ import me.hackusatepvp.fall.tags.TagsGUI;
 import me.hackusatepvp.fall.tags.TagsListener;
 import me.hackusatepvp.fall.util.IDHandler;
 import me.hackusatepvp.fall.util.MySQL;
+import me.hackusatepvp.fall.util.SaveTask;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -81,9 +85,10 @@ public final class Fall extends JavaPlugin {
     private KitsGUI kitsGUI;
     private ColorGUI colorGUI;
     private PlayerManager playerManager;
+    private BountyConfiguration bountyConfiguration;
     private BountyManager bountyManager;
-    private BountyTimer bountyTimer;
     private StaffManager staffManager;
+    private SaveTask saveTask;
     private static Fall instance;
 
     public void onEnable() {
@@ -119,8 +124,6 @@ public final class Fall extends JavaPlugin {
             log.info("[Fall] Loading scoreboard and tab...");
             getS();
             this.getGameManager().setGameState(GameState.STOP);
-            Fall.getInstance().getBountyTimer().setLeft(60); //300 default
-            Fall.getInstance().getBountyTimer().setRunning(false);
             log.info("[Fall] done!");
         }
     }
@@ -145,15 +148,21 @@ public final class Fall extends JavaPlugin {
         classesTask = new ClassesTask();
         classesTask.runTaskTimer(this, 0, 20);
         classesGUI = new ClassesGUI();
+        saveTask = new SaveTask();
+        saveTask.runTaskTimer(this, 0, 20);
         shopGUI = new ShopGUI();
         tagsGUI = new TagsGUI();
         kitsGUI = new KitsGUI();
         colorGUI = new ColorGUI();
         playerManager = new PlayerManager();
-        bountyManager = new BountyManager();
-        bountyTimer = new BountyTimer();
         staffManager = new StaffManager();
-        bountyTimer.runTaskTimer(this, 0, 20);
+        bountyManager = new BountyManager();
+        Bukkit.getLogger().info("[FateFFA] Loading announcements.yml");
+        this.bountyConfiguration = new BountyConfiguration(this, "bounties.yml");
+        this.bountyConfiguration.saveConfig();
+        this.bountyConfiguration.getConfig().options().copyDefaults(true);
+        this.bountyConfiguration.saveConfig();
+        this.bountyConfiguration.reloadConfig();
     }
 
     public void onDisable() {
@@ -180,9 +189,12 @@ public final class Fall extends JavaPlugin {
     }
 
     private void registerCommands() {
+        getCommand("bounty").setExecutor(new BountyCommand());
+        getCommand("bountylist").setExecutor(new BountyListCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
         getCommand("clan").setExecutor(new ClansCommand());
         getCommand("class").setExecutor(new ClassCommand());
+        getCommand("console").setExecutor(new ConsoleCommand());
         getCommand("color").setExecutor(new ColorCommand());
         getCommand("combat").setExecutor(new CombatCommand());
         getCommand("creative").setExecutor(new CreativeCommand());
@@ -192,6 +204,8 @@ public final class Fall extends JavaPlugin {
         getCommand("enderchest").setExecutor(new EnderchestCommand());
         getCommand("fall").setExecutor(new FallCommand());
         getCommand("fixhand").setExecutor(new FixHandCommand());
+        getCommand("god").setExecutor(new GodCommand());
+        getCommand("hidestaff").setExecutor(new HideStaffCommand());
         getCommand("info").setExecutor(new InfoCommand());
         getCommand("kits").setExecutor(new KitsCommand());
         getCommand("level").setExecutor(new LevelCommand());

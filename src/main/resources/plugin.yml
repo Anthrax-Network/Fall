@@ -4,6 +4,10 @@ main: me.hackusatepvp.fall.Fall
 authors: [iKeneny, Hackusate_PvP]
 description: Quite possibly the best kit plugin there is.
 commands:
+  bounty:
+    description: Pay the right price to kill.
+  bountylist:
+    description: Get the bounties of all players online.
   broadcast:
     aliases: [bc]
     description: Broadcast a message to the entire server.
@@ -14,6 +18,7 @@ commands:
   color:
     aliases: [colors, cc]
     description: Change the color of your name.
+  console:
   combat:
     aliases: [ct]
     description: View your combat status.
@@ -36,6 +41,8 @@ commands:
   fixhand:
     aliases: [fh]
     description: Need a quick fix?
+  god:
+  hidestaff:
   info:
     description: Does nothing.
   kits:
