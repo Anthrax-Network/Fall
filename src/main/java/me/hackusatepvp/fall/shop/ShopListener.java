@@ -3,6 +3,7 @@ package me.hackusatepvp.fall.shop;
 import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.shop.armor.Armor;
 import me.hackusatepvp.fall.shop.armor.ArmorShop;
+import me.hackusatepvp.fall.shop.enchants.Enchants;
 import me.hackusatepvp.fall.shop.weapons.Weapons;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,11 +29,12 @@ public class ShopListener implements Listener {
                         if (event.getClickedInventory().getName().contains("Armor")) {
                             event.setCancelled(true);
                             if (ArmorShop.getByName(event.getCurrentItem().getType().name()) != null) {
-                                Armor armor = Armor.getByName(event.getCurrentItem().getItemMeta().getDisplayName());
-                                armor.onPurchase(player, armor.getCategory(), armor.getItem(), armor.getCoast());
+                                Armor armor = Armor.getByName(event.getCurrentItem().getType().name());
+                                armor.onPurchase(player, armor.getItem());
+                                player.sendMessage("Item found.");
                             }
                         }
-                        if (event.getClickedInventory().getName().contains("Weapons")) {
+                        if (event.getClickedInventory().getName().contains("Weapon")) {
                             event.setCancelled(true);
                             if (Weapons.getByName(event.getCurrentItem().getItemMeta().getDisplayName()) != null) {
                                 Weapons weapons = Weapons.getByName(event.getCurrentItem().getItemMeta().getDisplayName());
@@ -42,8 +44,8 @@ public class ShopListener implements Listener {
                         if (event.getClickedInventory().getName().contains("Enchants")) {
                             event.setCancelled(true);
                             if (Weapons.getByName(event.getCurrentItem().getType().name()) != null) {
-                                Armor armor = Armor.getByName(event.getCurrentItem().getItemMeta().getDisplayName());
-                                armor.onPurchase(player, armor.getCategory(), armor.getItem(), armor.getCoast());
+                                Enchants enchants = Enchants.getByName(event.getCurrentItem().getItemMeta().getDisplayName());
+                                enchants.onPurchase(player, enchants.getItem());
                             }
                         }
                     }

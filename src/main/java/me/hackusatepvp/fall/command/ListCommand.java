@@ -22,7 +22,7 @@ public class ListCommand implements CommandExecutor {
         //todo vanish
         List<String> lines = new ArrayList<>();
         lines.add("&7&m--------------------------------------");
-        lines.add( "&7There are &9" + getOnline() + " &7staff online.");
+        lines.add( "&7There are &9" + getOnline() + " &7online.");
         lines.add("");
         lines.add("&9Online Staff:");
         if (Fall.getInstance().getStaffManager().getStaff().size() == 0) {

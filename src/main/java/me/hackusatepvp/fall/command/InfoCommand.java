@@ -26,8 +26,7 @@ public class InfoCommand implements CommandExecutor {
         } else {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target != null) {
-                Info info = new Info(target);
-                Fall.getInstance().getInfoManager().addInfo(target.getUniqueId(), info);
+
                 player.openInventory(Fall.getInstance().getInfoGUI().getInfoGUI(target));
             } else {
                 player.sendMessage(ChatColor.RED + "Target not found");

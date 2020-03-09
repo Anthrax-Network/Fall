@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public class DiamondHelmet extends Armor {
 
     public DiamondHelmet() {
-        super("DiamondHelmet");
+        super("DIAMOND_HELMET");
     }
     @Override
     public String getName() {
@@ -35,16 +35,17 @@ public class DiamondHelmet extends Armor {
     }
 
     @Override
-    public void onPurchase(Player player, String category, ItemStack itemStack, Double coast) {
-        if (category.equals("armor")) {
-            if (itemStack == getItem()) {
-                Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
-                if (profile.getBalance() >= coast) {
-                    Fall.getInstance().getEconomyManager().subtractBalance(profile, coast);
-                    player.getInventory().addItem(itemStack);
-                    player.sendMessage(ChatColor.GREEN + "You have purchased the " + getName() + " for $" + getCoast());
-                }
+    public void onPurchase(Player player, ItemStack itemStack) {
+        if (itemStack == getItem()) {
+            Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
+            if (profile.getBalance() >= getCoast()) {
+                Fall.getInstance().getEconomyManager().subtractBalance(profile, getCoast());
+                player.getInventory().addItem(itemStack);
+                player.sendMessage(ChatColor.GREEN + "You have purchased the " + getName() + " for $" + getCoast());
+            } else {
+                player.sendMessage(ChatColor.RED + "You cannot afford this item.");
             }
         }
     }
 }
+

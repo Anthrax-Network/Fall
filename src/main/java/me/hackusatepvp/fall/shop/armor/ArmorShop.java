@@ -40,7 +40,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }
@@ -54,7 +53,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }
@@ -68,7 +66,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }
@@ -82,7 +79,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }
@@ -96,7 +92,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }
@@ -110,7 +105,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }
@@ -124,7 +118,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }
@@ -138,7 +131,6 @@ public class ArmorShop extends Shop {
                 "&cSell for N/A"
         };
         List<String> lines = Arrays.asList(lore);
-        lines.forEach(line -> StringUtil.format(line));
         itemMeta.setLore(lines);
         return itemStack;
     }

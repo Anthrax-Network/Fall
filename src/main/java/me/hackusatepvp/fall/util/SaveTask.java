@@ -16,11 +16,9 @@ public class SaveTask extends BukkitRunnable {
          ++left;
          if (left == 120) {
              for (Player player : Bukkit.getOnlinePlayers()) {
-                 player.sendMessage(StringUtil.format("\n&7Saving all data.\n"));
+                 player.sendMessage(StringUtil.format("&7Saving all data."));
                  Fall.getInstance().getProfileManager().unload(player);
                  Fall.getInstance().getProfileManager().load(player);
-                 Fall.getInstance().getMySQL().disconnectClans();
-                 Fall.getInstance().getMySQL().disconnectProfiles();
                  Fall.getInstance().getMySQL().profiles();
              }
          }

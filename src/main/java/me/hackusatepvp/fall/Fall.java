@@ -157,7 +157,6 @@ public final class Fall extends JavaPlugin {
         playerManager = new PlayerManager();
         staffManager = new StaffManager();
         bountyManager = new BountyManager();
-        Bukkit.getLogger().info("[FateFFA] Loading announcements.yml");
         this.bountyConfiguration = new BountyConfiguration(this, "bounties.yml");
         this.bountyConfiguration.saveConfig();
         this.bountyConfiguration.getConfig().options().copyDefaults(true);

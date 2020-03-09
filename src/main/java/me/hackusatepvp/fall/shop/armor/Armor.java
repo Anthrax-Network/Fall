@@ -42,7 +42,7 @@ public abstract class Armor {
 
     public abstract Double getCoast();
 
-    public void onPurchase(Player player, String category, ItemStack itemStack, Double coast) {
+    public void onPurchase(Player player, ItemStack itemStack) {
 
     }
 
