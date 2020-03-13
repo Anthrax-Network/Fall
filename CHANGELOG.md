@@ -15,6 +15,7 @@
 - Changing some settings via /settings will break the player's profile
 - Tab spams console when joining the server within 20 seconds of startup
 - Bows do not work
+- SaveTask will produce errors randomly (still looking into it)
 ###### Incomplete
 - Classes is incomplete
 - Colors is incomplete
