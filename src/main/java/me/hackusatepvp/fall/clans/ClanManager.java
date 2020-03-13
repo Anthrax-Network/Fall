@@ -1,5 +1,6 @@
 package me.hackusatepvp.fall.clans;
 
+import lombok.Getter;
 import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.profile.Profile;
 import org.bukkit.Bukkit;
@@ -13,7 +14,8 @@ import java.util.*;
 public class ClanManager {
     private final String INSERT = "INSERT INTO clans VALUES(?,?,?,?,?)";
 
-    private Set<Clan> clans = new HashSet<>();
+    @Getter private Set<Clan> clans = new HashSet<>();
+    @Getter private Set<ClanPlayer> clanPlayers = new HashSet<>();
 
 
     // look i gotta dip for a couple hours I have to volunteer somewhere but when i get back ill msg u see if ur still on, maybe I can help out a little more
@@ -23,9 +25,9 @@ public class ClanManager {
         clan.getMembers().add(clanPlayer);
     }
 
-    public void removeFromClan(Clan clan, ClanPlayer clanPlayer, Player kicked) {
+    public void removeFromClan(Clan clan, ClanPlayer clanPlayer, Player player) {
         clan.getMembers().remove(clanPlayer);
-        Profile profile = Fall.getInstance().getProfileManager().getProfile(kicked.getUniqueId());
+        Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
         profile.setClan("null");
         profile.setPrefix("null");
         profile.setLeader("null");

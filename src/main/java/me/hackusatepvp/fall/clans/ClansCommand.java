@@ -24,7 +24,7 @@ public class ClansCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
         Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
-        if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
+        if (Fall.getInstance().getClanManager().inClan(player.getUniqueId()) && !profile.getClan().equalsIgnoreCase("null")) {
             ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);
             if (args.length == 0) {
                 List<String> helpMessages = new ArrayList<>();
@@ -191,18 +191,19 @@ public class ClansCommand implements CommandExecutor {
                         if (clanPlayer.getClan().getLeader().equalsIgnoreCase(player.getDisplayName())) {
                             Clan clan = Fall.getInstance().getClanManager().getClan(clanPlayer);
                             for (ClanPlayer members : clan.getMembers()) {
-                                members.getPlayer().sendMessage(ChatColor.RED + "Clan has been disbanded.");
                                 Profile promem = Fall.getInstance().getProfileManager().getProfile(members.getUuid());
                                 profile.setClan("null");
                                 profile.setClanrank("null");
                                 profile.setLadder(0);
                                 profile.setPrefix("null");
                                 profile.setLeader("null");
+                                members.getPlayer().sendMessage(ChatColor.RED + "Clan has been disbanded.");
                                 promem.setClan("null");
                                 promem.setClanrank("null");
                                 promem.setLadder(0);
                                 promem.setPrefix("null");
                                 promem.setLeader("null");
+                                Fall.getInstance().getClanManager().getClans().remove(clan);
                             }
                             player.sendMessage(ChatColor.RED + "Clan data may take up to 24hr to be wiped.");
                             //do last

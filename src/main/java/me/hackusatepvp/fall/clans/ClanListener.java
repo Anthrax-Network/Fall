@@ -66,9 +66,11 @@ public class ClanListener implements Listener {
     @EventHandler
     public void onDisconnect(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
-            ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);
-            Fall.getInstance().getClanManager().unload(clanPlayer.getClan());
+        if (Fall.getInstance().getClanManager().getClanPlayer(player) != null) {
+            if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
+                ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);
+                Fall.getInstance().getClanManager().unload(clanPlayer.getClan());
+            }
         }
     }
 
