@@ -16,9 +16,10 @@
 - Tab spams console when joining the server within 20 seconds of startup
 - Bows do not work
 ###### Incomplete
-- Classes are incomplete
-- Colors are incomplete
+- Classes is incomplete
+- Colors is incomplete
 - Shop is incomplete
+- Vouchers is incomplete
 ###### TODOS
 - Get Clans in a working state
 - Start on classes
