@@ -14,6 +14,7 @@
 - Clan bugs may still exist 
 - Changing some settings via /settings will break the player's profile
 - Tab spams console when joining the server within 20 seconds of startup
+- Bows do not work
 ###### Incomplete
 - Classes are incomplete
 - Colors are incomplete
