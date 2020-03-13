@@ -4,7 +4,6 @@
 ###### Added
 - Added [SaveTask](https://github.com/Anthrax-Network/Fall/blob/master/src/main/java/me/hackusatepvp/fall/util/MySQL.java)
 - Added [HideStaffCommand](https://github.com/Anthrax-Network/Fall/blob/1.1/src/main/java/me/hackusatepvp/fall/staff/commands/HideStaffCommand.java) (untested)
-- 
 ###### Fxied
 - Clan bugs (disbanding, creating, logical errors in [ClanManager](https://github.com/Anthrax-Network/Fall/blob/1.1/src/main/java/me/hackusatepvp/fall/clans/ClanManager.java))
 - Fixed erros in [TabLink](https://github.com/Anthrax-Network/Fall/blob/1.1/src/main/java/me/hackusatepvp/fall/tab/TabLink.java) dealing with clans
