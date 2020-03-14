@@ -28,3 +28,23 @@
 - Add more Tags for players to chose from
 - Test the new changes in Staff
 - Start debugging Shop
+
+## Update [1.2](https://github.com/Anthrax-Network/Fall/releases/tag/1.2)
+###### Added
+- Added [SurvivalCommand](https://github.com/Anthrax-Network/Fall/blob/1.2/src/main/java/me/hackusatepvp/fall/command/SurvivalCommand.java)
+###### Fixed
+- All clan members on tablist no longer appear on one line. They will now be sepreated on multiple lines.
+- Fixed tablist with clan members; they will no longer appear more than once
+- HideStaff will now only hide staff-members who are in staffemode
+###### Incomplete
+- Classes is incomplete
+- Colors is incomplete
+- Shop is incomplete
+- Vouchers is incomplete
+###### TODOS
+- Get Clans in a working state
+- Start on classes
+- Add more colors for players to chose from
+- Add more Tags for players to chose from
+- ~~Test the new changes in Staff~~
+- Start debugging Shop
