@@ -11,6 +11,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TabLink implements TabAdapter {
     public TabTemplate getTemplate(Player player) {
@@ -48,9 +50,16 @@ public class TabLink implements TabAdapter {
                     Clan clan = clanPlayer.getClan();
                     blue.middle(4, "&9&l" + clan.getName());
                     blue.middle(5, "&7Prefix: &b" + clan.getPrefix());
-                    blue.middle(6, "&7Online: &b");
-                    blue.middle(7, "&7Members: &b" + clan.getMembers().size());
-                    blue.middle(8, "");
+                    blue.middle(6, "&7Members: &b" + clan.getSize());
+                    blue.middle(7, "&7Online: &b" + clan.getOnline());
+                    int count = 0;
+                    for (ClanPlayer member : clan.getMembers()) {
+                        if (member.getClan() == clanPlayer.getClan()) {
+                            count++;
+                            blue.middle(7 + count, "&9" + member.getPlayer().getName());
+                        }
+                    }
+
                 }
 
                 blue.right(1, "&9Ranks");
@@ -95,8 +104,14 @@ public class TabLink implements TabAdapter {
                     red.middle(4, "&4&l" + clan.getName());
                     red.middle(5, "&7Prefix: &c" + clan.getPrefix());
                     red.middle(6, "&7Members: &c" + clan.getMembers().size());
-                    red.middle(7, "");
-                    red.middle(8, "");
+                    red.middle(7, "&7Online: &c" + clan.getOnline());
+                    int count = 0;
+                    for (ClanPlayer member : clan.getMembers()) {
+                        if (member.getClan().getName().equals(clanPlayer.getClan().getName())) {
+                            count++;
+                            red.middle(7 + count, "&c" + member.getPlayer().getName());
+                        }
+                    }
                 }
 
                 red.right(1, "&4Ranks");

@@ -66,14 +66,18 @@ public class StaffManager {
             hidestaff.add(player);
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (isStaff(online.getUniqueId())) {
-                    player.hidePlayer(online);
+                    if (isStaffMode(online)) {
+                        player.hidePlayer(online);
+                    }
                 }
             }
         } else {
             hidestaff.remove(player);
             for (Player online : Bukkit.getOnlinePlayers()) {
                 if (isStaff(online.getUniqueId())) {
-                    player.showPlayer(online);
+                    if (isStaffMode(online)) {
+                        player.showPlayer(online);
+                    }
                 }
             }
         }

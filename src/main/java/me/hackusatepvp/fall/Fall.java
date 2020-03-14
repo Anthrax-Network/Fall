@@ -157,11 +157,6 @@ public final class Fall extends JavaPlugin {
         playerManager = new PlayerManager();
         staffManager = new StaffManager();
         bountyManager = new BountyManager();
-        this.bountyConfiguration = new BountyConfiguration(this, "bounties.yml");
-        this.bountyConfiguration.saveConfig();
-        this.bountyConfiguration.getConfig().options().copyDefaults(true);
-        this.bountyConfiguration.saveConfig();
-        this.bountyConfiguration.reloadConfig();
     }
 
     public void onDisable() {
@@ -223,6 +218,7 @@ public final class Fall extends JavaPlugin {
         getCommand("staff").setExecutor(new StaffCommand());
         getCommand("stats").setExecutor(new StatsCommand());
         getCommand("sumo").setExecutor(new SumoCommand());
+        getCommand("survival").setExecutor(new SurvivalCommand());
         getCommand("tags").setExecutor(new TagsCommand());
         getCommand("teleport").setExecutor(new TeleportCommand());
         getCommand("togglemessages").setExecutor(new ToggleMessageCommand());

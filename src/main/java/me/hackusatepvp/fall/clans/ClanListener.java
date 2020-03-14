@@ -66,7 +66,7 @@ public class ClanListener implements Listener {
     @EventHandler
     public void onDisconnect(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if (Fall.getInstance().getClanManager().getClanPlayer(player) != null) {
+        if (Fall.getInstance().getClanManager().getClanPlayer(player) != null && Fall.getInstance().getClanManager().getClanPlayer(player).getClan() != null) {
             if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
                 ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);
                 Fall.getInstance().getClanManager().unload(clanPlayer.getClan());
@@ -82,12 +82,10 @@ public class ClanListener implements Listener {
                 if (clanPlayer != null) {
                     if (Fall.getInstance().getClanManager().getClan(clanPlayer) != null) {
                         Clan clan = Fall.getInstance().getClanManager().getClan(clanPlayer.getClan().getName());
-                        clan.getMembers().add(clanPlayer);
                         Fall.getInstance().getClanManager().addToClan(clan, clanPlayer);
                         profile.setClan(clan.getName());
                     } else {
                         Clan clan = new Clan(profile.getLeader(), profile.getClan(), profile.getPrefix());
-                        clan.getMembers().add(clanPlayer);
                         Fall.getInstance().getClanManager().load(clan);
                         Fall.getInstance().getClanManager().addToClan(clan, clanPlayer);
                         Fall.getInstance().getClanManager().createClan(clan);
@@ -99,13 +97,11 @@ public class ClanListener implements Listener {
                     if (Fall.getInstance().getClanManager().getClan(profile.getClan()) != null) {
                         Clan clan = Fall.getInstance().getClanManager().getClan(profile.getClan());
                         ClanPlayer work = new ClanPlayer(player.getUniqueId(), clan, profile.getClanrank(), profile.getLadder(), player);
-                        clan.getMembers().add(work);
                         Fall.getInstance().getClanManager().addToClan(clan, work);
                         profile.setClan(clan.getName());
                     } else {
                         Clan clan = new Clan(profile.getLeader(), profile.getClan(), profile.getPrefix());
                         ClanPlayer work = new ClanPlayer(player.getUniqueId(), clan, profile.getClanrank(), profile.getLadder(), player);
-                        clan.getMembers().add(work);
                         Fall.getInstance().getClanManager().load(clan);
                         Fall.getInstance().getClanManager().addToClan(clan, work);
                         Fall.getInstance().getClanManager().createClan(clan);

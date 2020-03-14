@@ -82,6 +82,9 @@ commands:
     description: View your pro level stats.
   sumo:
     description: Join or create a sumo event.
+  survival:
+    aliases: [gms]
+    description: Change your gamemode to survival.
   tags:
     description: A simple GUI to handle all tags.
   teleport:

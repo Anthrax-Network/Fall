@@ -190,6 +190,7 @@ public class ClansCommand implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("disband")) {
                         if (clanPlayer.getClan().getLeader().equalsIgnoreCase(player.getDisplayName())) {
                             Clan clan = Fall.getInstance().getClanManager().getClan(clanPlayer);
+                            Fall.getInstance().getClanManager().getClan(clan.getName()).getMembers().forEach(member -> member.getPlayer().sendMessage(StringUtil.format("&cThe clan has been disbanded.")));
                             for (ClanPlayer members : clan.getMembers()) {
                                 Profile promem = Fall.getInstance().getProfileManager().getProfile(members.getUuid());
                                 profile.setClan("null");
@@ -197,7 +198,6 @@ public class ClansCommand implements CommandExecutor {
                                 profile.setLadder(0);
                                 profile.setPrefix("null");
                                 profile.setLeader("null");
-                                members.getPlayer().sendMessage(ChatColor.RED + "Clan has been disbanded.");
                                 promem.setClan("null");
                                 promem.setClanrank("null");
                                 promem.setLadder(0);
@@ -206,7 +206,6 @@ public class ClansCommand implements CommandExecutor {
                                 Fall.getInstance().getClanManager().getClans().remove(clan);
                             }
                             player.sendMessage(ChatColor.RED + "Clan data may take up to 24hr to be wiped.");
-                            //do last
                             Fall.getInstance().getClanManager().deleteClan(clan);
                         } else {
                             player.sendMessage(ChatColor.RED + "Sorry, only the owner can disband the clan.");

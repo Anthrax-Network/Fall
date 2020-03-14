@@ -1,11 +1,20 @@
 package me.hackusatepvp.fall.classes;
 
+import me.hackusatepvp.fall.Fall;
+import me.hackusatepvp.fall.util.StringUtil;
+import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.projectiles.ProjectileSource;
 
 public class ClassesListener implements Listener {
 
@@ -65,6 +74,23 @@ public class ClassesListener implements Listener {
                 classes.onItemUse(event.getPlayer(), classes, event.getPlayer().getItemInHand());
             }
         }
+    }
 
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onProjectileLaunch(ProjectileLaunchEvent event) {
+        Projectile projectile = event.getEntity();
+        if (projectile instanceof Arrow) {
+            Arrow arrow = (Arrow) projectile;
+            ProjectileSource source = arrow.getShooter();
+            if (source instanceof Player) {
+                Player shooter = (Player) source;
+                if (Fall.getInstance().getCombatManager().isPearlCooldown(shooter)) {
+                    ItemStack item = shooter.getItemInHand();
+                    if (item.getItemMeta().getDisplayName().equalsIgnoreCase(Classes.ARCHER_CLASS.getItems().get(0).getItemMeta().getDisplayName())) {
+                        shooter.getInventory().remove(item);
+                    }
+                }
+            }
+        }
     }
 }

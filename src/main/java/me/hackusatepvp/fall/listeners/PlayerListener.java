@@ -41,7 +41,6 @@ public class PlayerListener implements Listener {
    @EventHandler(ignoreCancelled = true)
     public void onPlayerJoin(PlayerJoinEvent event) {
        Player player = event.getPlayer();
-       UUID uuid = player.getUniqueId();
        if (Fall.getInstance().getProfileManager().hasProfile(player.getUniqueId())) {
            Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
            if (profile.getBoardstyle() == null) {

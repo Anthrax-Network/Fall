@@ -35,7 +35,7 @@ public class ArcherClass extends Classes {
         ItemStack bow = new ItemStack(Material.BOW);
         ItemStack arrow = new ItemStack(Material.ARROW, 1);
         ItemMeta bowm = bow.getItemMeta();
-        bowm.addEnchant(Enchantment.ARROW_DAMAGE, 4, true);
+        bowm.addEnchant(Enchantment.ARROW_DAMAGE, 5, true);
         bow.setDurability((short) 383);
         bowm.setDisplayName(StringUtil.format("&9Fail-Not"));
         bow.setItemMeta(bowm);
@@ -72,12 +72,14 @@ public class ArcherClass extends Classes {
 
     @Override
     public void onItemUse(Player player, Classes classes, ItemStack itemStack) {
-        if (itemStack.getType() == Material.BOW) {
-            Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
-            if (profile.getActiveQuest().equals("Archer")) {
-                player.getInventory().removeItem(itemStack);
-            } else {
-                player.getInventory().removeItem(itemStack);
+        if (classes == this) {
+            if (itemStack.getType() == Material.BOW) {
+                Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
+                if (profile.getActiveQuest().equals("Archer")) {
+                    player.getInventory().removeItem(itemStack);
+                } else {
+                    player.getInventory().removeItem(itemStack);
+                }
             }
         }
     }
