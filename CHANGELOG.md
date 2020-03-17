@@ -49,7 +49,7 @@
 - ~~Test the new changes in Staff~~
 - Start debugging Shop
 
-## Update [1.3](LINK)
+## Update [1.3](https://github.com/Anthrax-Network/Fall/releases/tag/1.3)
 #### Added/Changes
 - Re-coded [Info](https://github.com/Anthrax-Network/Fall/tree/master/src/main/java/me/hackusatepvp/fall/info)
 - Added [RenameCommand](https://github.com/Anthrax-Network/Fall/blob/master/src/main/java/me/hackusatepvp/fall/command/RenameCommand.java)
