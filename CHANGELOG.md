@@ -48,3 +48,33 @@
 - Add more Tags for players to chose from
 - ~~Test the new changes in Staff~~
 - Start debugging Shop
+
+## Update [1.3](LINK)
+#### Added/Changes
+- Re-coded [Info](https://github.com/Anthrax-Network/Fall/tree/master/src/main/java/me/hackusatepvp/fall/info)
+- Added [RenameCommand](https://github.com/Anthrax-Network/Fall/blob/master/src/main/java/me/hackusatepvp/fall/command/RenameCommand.java)
+- Tags and ChatColor have been re-worked
+- Added Info into staff items
+- Added more Tags
+#### Fxied
+- Fixed member stacking with clans; removes the player from the clan list when they disconnect
+- Fxied clan online count
+- Fixed multiple bounty messages
+- Fixed [StaffItemsListener](https://github.com/Anthrax-Network/Fall/blob/master/src/main/java/me/hackusatepvp/fall/staff/listeners/StaffItemsListener.java) 
+- Staff items will only work if player is in staffmode
+- Fixed /clan join
+- Disconnecting no longer unloads the entire clan. It will only unload the clan when there are no members online.
+- Fixed clan invite
+- Fixed the clan member loop in [TabLink](https://github.com/Anthrax-Network/Fall/blob/master/src/main/java/me/hackusatepvp/fall/tab/TabLink.java)
+#### Incomplete
+- Classes is incomplete
+- Colors is incomplete
+- Shop is incomplete
+- Vouchers is incomplete
+#### TODOS
+- Get Clans in a working state
+- Start on classes
+- Add more colors for players to chose from
+- Add more Tags for players to chose from
+- ~~Test the new changes in Staff~~
+- Start debugging Shop
