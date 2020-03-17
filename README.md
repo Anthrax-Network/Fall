@@ -38,7 +38,7 @@ In order to set a player as staff you have to type in console `/console staff <p
 ```javascript
 if (player.getUniqueId().equals(UUID.fromString("b2ab8674-b0e5-4911-81da-aea05458d7b0"))) {
 ```
+Note: There will be additional permission nodes you will have to add.
 
 ## Download
 You can now download the latest releases [here](https://github.com/Anthrax-Network/Fall/releases)
-Note: There will be additional permission nodes you will have to add.
