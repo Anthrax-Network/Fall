@@ -30,7 +30,7 @@
 - ~~Test the new changes in Staff~~
 - Start debugging Shop
 
-## Update [1.2](Coming soon)
+## Update [1.2](https://github.com/Anthrax-Network/Fall/releases/tag/1.2)
 #### Added
 - Added [SurvivalCommand](https://github.com/Anthrax-Network/Fall/blob/1.2/src/main/java/me/hackusatepvp/fall/command/SurvivalCommand.java)
 #### Fixed
