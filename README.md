@@ -22,6 +22,8 @@ Use `Fall.getInstance()` to view all the managers you can access.
 - A kit plugin (such as essentials)
 - PermissionsEx
 - Vault
+- Azazel (extracted in source)
+- Assymble (extracted in source)
 - A MySQL database
 
 ## Quests
