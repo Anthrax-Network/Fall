@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TabLink implements TabAdapter {
     public TabTemplate getTemplate(Player player) {
         Profile profile = Fall.getInstance().getProfileManager().getProfile(player.getUniqueId());
@@ -47,21 +48,28 @@ public class TabLink implements TabAdapter {
                 blue.middle(1, "&7Online: &b" + Bukkit.getOnlinePlayers().size());
                 if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
                     ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);
-                    Clan clan = clanPlayer.getClan();
-                    blue.middle(4, "&9&l" + clan.getName());
-                    blue.middle(5, "&7Prefix: &b" + clan.getPrefix());
-                    blue.middle(6, "&7Members: &b" + clan.getSize());
-                    blue.middle(7, "&7Online: &b" + clan.getOnline());
-                    int count = 0;
-                    for (ClanPlayer member : clan.getMembers()) {
-                        if (member.getClan() == clanPlayer.getClan()) {
-                            count++;
-                            blue.middle(7 + count, "&9" + member.getPlayer().getName());
+                    if (clanPlayer != null) {
+                        Clan clan = Fall.getInstance().getClanManager().getClan(profile.getClan());
+                        if (clan != null) {
+                            blue.middle(4, "&9&l" + clan.getName());
+                            blue.middle(5, "&7Prefix: &b" + clan.getPrefix());
+                            blue.middle(6, "&7Members: &b" + clan.getSize());
+                            blue.middle(7, "&7Online: &b" + clan.getOnline());
+                            int count = 0;
+                            int newcount = 0;
+                            for (ClanPlayer member : clan.getMembers()) {
+                                if (member.getClan() == clanPlayer.getClan()) {
+                                    count++;
+                                    if (count > clan.getOnline()) {
+                                        blue.middle(count - newcount, "");
+                                    } else {
+                                        blue.middle(7 + count, "&7- &9" + member.getPlayer().getName());
+                                    }
+                                }
+                            }
                         }
                     }
-
                 }
-
                 blue.right(1, "&9Ranks");
                 blue.right(2, "&b* &7Fate");
                 blue.right(3, "&b* &7Saber");
@@ -106,10 +114,15 @@ public class TabLink implements TabAdapter {
                     red.middle(6, "&7Members: &c" + clan.getMembers().size());
                     red.middle(7, "&7Online: &c" + clan.getOnline());
                     int count = 0;
+                    int newcount = 0;
                     for (ClanPlayer member : clan.getMembers()) {
-                        if (member.getClan().getName().equals(clanPlayer.getClan().getName())) {
+                        if (member.getClan() == clanPlayer.getClan()) {
                             count++;
-                            red.middle(7 + count, "&c" + member.getPlayer().getName());
+                            if (count > clan.getOnline()) {
+                                red.middle(count - newcount, "");
+                            } else {
+                                red.middle(7 + count, "&7- &9" + member.getPlayer().getName());
+                            }
                         }
                     }
                 }

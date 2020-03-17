@@ -22,9 +22,11 @@ public class BountyListCommand implements CommandExecutor {
         Player player = (Player) sender;
         HashMap<String, Double> bounties = new HashMap<>();
         player.sendMessage(StringUtil.format("&7&m---------------------------------"));
+        int count = 0;
         for (Player online : Bukkit.getOnlinePlayers()) {
             Profile tar = Fall.getInstance().getProfileManager().getProfile(online.getUniqueId());
             if (tar.isBounty()) {
+                count++;
                 bounties.entrySet()
                         .stream()
                         .sorted(Map.Entry.comparingByValue())
@@ -34,6 +36,9 @@ public class BountyListCommand implements CommandExecutor {
                        "&b* &a" + bounties.get(online.getName()) + "$ &7" + online.getName(),
                 };
                 Arrays.asList(message).forEach(msg -> player.sendMessage(StringUtil.format(msg)));
+            }
+            if (count == 0) {
+                player.sendMessage(StringUtil.format("&cNo current bounties."));
             }
         }
         player.sendMessage(StringUtil.format("&7&m---------------------------------"));

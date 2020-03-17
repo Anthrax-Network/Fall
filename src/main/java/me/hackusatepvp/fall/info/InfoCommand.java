@@ -17,14 +17,7 @@ public class InfoCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
         if (args.length == 0) {
-            player.sendMessage(StringUtil.format("&cUsage: /info <player>"));
-        } else {
-            if (args.length == 1) {
-                Player target = Bukkit.getPlayerExact(args[0]);
-                if (target != null) {
-                    player.openInventory(Fall.getInstance().getInfoGUI().getInfoGUI(target));
-                }
-            }
+            player.openInventory(Fall.getInstance().getInfoGUI().getInfoGUI());
         }
         return false;
     }

@@ -30,12 +30,34 @@ public class RareCategory extends Category {
     }
 
     @Override
+    public ItemStack getBack() {
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(StringUtil.format("&7* &cBack"));
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    @Override
+    public ItemStack remove() {
+        ItemStack itemStack = new ItemStack(Material.REDSTONE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(StringUtil.format("&7* &cRemove"));
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+
+    @Override
     public Inventory getInventory() {
-        Inventory i = Bukkit.createInventory(null, 9, StringUtil.format("&7* &bRare Tags"));
+        Inventory i = Bukkit.createInventory(null, 18, StringUtil.format("&7* &bRare Tags"));
         i.setItem(0, Tags.getByName(StringUtil.format("&bHero &7Tag")).getIcon());
         i.setItem(1, Tags.getByName(StringUtil.format("&cKiller &7Tag")).getIcon());
         i.setItem(2, Tags.getByName(StringUtil.format("Shrug")).getIcon());
         i.setItem(3, Tags.getByName(StringUtil.format("&5Villain &7Tag")).getIcon());
+        i.setItem(9, remove());
+        i.setItem(13, getBack());
+        i.setItem(17, remove());
         return i;
     }
 

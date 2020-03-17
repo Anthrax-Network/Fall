@@ -22,15 +22,7 @@ public class InfoCommand implements CommandExecutor {
             return true;
         }
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /info <player>");
-        } else {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target != null) {
-
-                player.openInventory(Fall.getInstance().getInfoGUI().getInfoGUI(target));
-            } else {
-                player.sendMessage(ChatColor.RED + "Target not found");
-            }
+            player.openInventory(Fall.getInstance().getInfoGUI().getInfoGUI());
         }
         return false;
     }

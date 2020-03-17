@@ -72,7 +72,6 @@ public class ClanManager {
     }
 
     public boolean inClan(UUID uuid) {
-
         for (Clan clan : clans) {
             for (ClanPlayer members : clan.getMembers()) {
                 if (members.getUuid().equals(uuid))

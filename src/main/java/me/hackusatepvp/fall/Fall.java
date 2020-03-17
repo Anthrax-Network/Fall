@@ -50,6 +50,7 @@ import me.hackusatepvp.fall.tags.TagsGUI;
 import me.hackusatepvp.fall.tags.TagsListener;
 import me.hackusatepvp.fall.util.IDHandler;
 import me.hackusatepvp.fall.util.MySQL;
+import me.hackusatepvp.fall.util.RestartTask;
 import me.hackusatepvp.fall.util.SaveTask;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -89,6 +90,7 @@ public final class Fall extends JavaPlugin {
     private BountyManager bountyManager;
     private StaffManager staffManager;
     private SaveTask saveTask;
+    private RestartTask restartTask;
     private static Fall instance;
 
     public void onEnable() {
@@ -150,6 +152,8 @@ public final class Fall extends JavaPlugin {
         classesGUI = new ClassesGUI();
         saveTask = new SaveTask();
         saveTask.runTaskTimer(this, 0, 20);
+        restartTask = new RestartTask();
+        restartTask.runTaskTimer(this, 0, 20);
         shopGUI = new ShopGUI();
         tagsGUI = new TagsGUI();
         kitsGUI = new KitsGUI();
@@ -178,7 +182,8 @@ public final class Fall extends JavaPlugin {
 
     private void registerListeners() {
         Arrays.asList(new ProfileListener(), new ServerListener(), new InfoGUI(), new DeathEvevnt(), new ChatEvent(), new SettingsGUI(), new QuestListener(), new PlayerListener(), new ClanListener(),
-                new PatchEvent(), new SumoListener(), new ClassesGUI(), new ShopListener(), new TagsListener(), new KitsListener(), new ColorListener(), new StaffPatch(), new StaffItemsListener())
+                new PatchEvent(), new SumoListener(), new ClassesGUI(), new ShopListener(), new TagsListener(), new KitsListener(), new ColorListener(), new StaffPatch(), new StaffItemsListener(),
+                new InfoGUI())
                 .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
@@ -213,6 +218,7 @@ public final class Fall extends JavaPlugin {
         getCommand("ranks").setExecutor(new RanksCommand());
         getCommand("reply").setExecutor(new ReplyCommand());
         getCommand("rules").setExecutor(new RulesCommand());
+        getCommand("rename").setExecutor(new RenameCommand());
         getCommand("settings").setExecutor(new SettingsCommand());
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("staff").setExecutor(new StaffCommand());

@@ -38,7 +38,6 @@ public class FateClass extends Classes {
         sword.setItemMeta(swordm);
         ItemStack perk = new ItemStack(Material.MONSTER_EGG, 1, (short) 100);
         return Arrays.asList(sword, perk);
-        //return new ItemStack[0];
     }
 
     @Override

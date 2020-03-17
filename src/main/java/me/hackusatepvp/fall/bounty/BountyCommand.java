@@ -27,7 +27,7 @@ public class BountyCommand implements CommandExecutor {
                     "&9&lBounty Information",
                     "&7/bounty &bcheck",
                     "&7/bounty &bset",
-                    "&7m-------------------------------------------",
+                    "&7&mm-------------------------------------------",
             };
             Arrays.asList(message).forEach(instance -> player.sendMessage(StringUtil.format(instance)));
         } else {

@@ -5,10 +5,7 @@ import me.hackusatepvp.fall.Fall;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MySQL {
 
@@ -47,6 +44,7 @@ public class MySQL {
                 PreparedStatement clans = this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS clans (UUID INT(4)," +
                         "NAME TEXT, PREFIX TEXT, LEADER TEXT, SIZE INT(0), " +
                         "PRIMARY KEY (UUID))");
+
                 clans.executeUpdate();
             } catch (SQLException e) {
                 Bukkit.getLogger().severe(e.getMessage());

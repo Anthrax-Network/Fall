@@ -10,6 +10,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -75,6 +77,46 @@ public class ClansCommand implements CommandExecutor {
                         }
                         lines.add("&7&m-----------------------------------");
                         lines.forEach(msg -> player.sendMessage(StringUtil.format(msg)));
+                    }
+                    if (args[0].equalsIgnoreCase("leave")) {
+                        Clan clan = Fall.getInstance().getClanManager().getClan(profile.getClan());
+                        if (clan.getLeader().equalsIgnoreCase(player.getName())) {
+                            player.sendMessage(StringUtil.format("&cYou cannot leave the clan you created, you must disband."));
+                            return true;
+                        }
+                        profile.setClanrank("null");
+                        profile.setLadder(0);
+                        profile.setPrefix("null");
+                        profile.setLeader("null");
+                        clan.getMembers().forEach(member -> member.getPlayer().sendMessage(StringUtil.format("&7* &c" + player.getName() + " &7has left the clan.")));
+                        clan.getMembers().remove(clanPlayer);
+                        clan.setOnline(clan.getOnline() - 1);
+                        profile.setClan("null");
+                        try {
+                            PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE profiles SET CLAN = ?, CLANRANK = ?, LADDER =? , INVITES =? , LEADER = ?, PREFIX = ? WHERE UUID = ?");
+                            preparedStatement.setString(1, profile.getClan());
+                            preparedStatement.setString(2, profile.getClanrank());
+                            preparedStatement.setInt(3, profile.getLadder());
+                            preparedStatement.setString(4, profile.getInvites());
+                            preparedStatement.setString(5, profile.getLeader());
+                            preparedStatement.setString(6, profile.getPrefix());
+                            preparedStatement.setString(7, player.getUniqueId().toString());
+                            preparedStatement.executeUpdate();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE clans SET NAME = ?, PREFIX = ?, LEADER = ?, SIZE = ? WHERE UUID = ?");
+                            preparedStatement.setString(1, clan.getName());
+                            preparedStatement.setString(2, clan.getPrefix());
+                            preparedStatement.setString(3, clan.getLeader());
+                            preparedStatement.setInt(4, clan.getSize());
+                            preparedStatement.setInt(5, clan.getUuid());
+                            preparedStatement.executeUpdate();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                     if (args[0].equalsIgnoreCase("roaster")) {
                             List<String> lines = new ArrayList<>();
@@ -239,17 +281,47 @@ public class ClansCommand implements CommandExecutor {
                             Clan clan = Fall.getInstance().getClanManager().getClan(profile.getInvites());
                             if (clan.getSize() < 8) {
                                 ClanPlayer clanPlayer = new ClanPlayer(player.getUniqueId(), clan, "default", 0, player);
-                                clanPlayer.getClan().getMembers().add(clanPlayer);
+                                Fall.getInstance().getClanManager().addToClan(clan, clanPlayer);
                                 for (ClanPlayer members : clanPlayer.getClan().getMembers()) {
                                     Player online = Bukkit.getPlayer(members.getUuid());
                                     if (online != null) {
                                         online.sendMessage(StringUtil.format("&9&l" + player.getName() + " &bhas joined the clan."));
                                     }
                                 }
-                                profile.setClan(clan.getName());
+
                                 profile.setClanrank("default");
-                                profile.setLeader(clan.getLeader());
-                                clan.setSize(clan.getSize() + 1);
+                                profile.setLeader(Fall.getInstance().getClanManager().getClan(profile.getInvites()).getLeader());
+                                profile.setClan(Fall.getInstance().getClanManager().getClan(profile.getInvites()).getName());
+                                profile.setLadder(0);
+                                profile.setPrefix(Fall.getInstance().getClanManager().getClan(profile.getInvites()).getPrefix());
+                                profile.setInvites("null");
+                                clan.setOnline(clan.getOnline() + 1);
+                                try {
+                                    PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE profiles SET CLAN = ?, CLANRANK = ?, LADDER =? , INVITES =? , LEADER = ?, PREFIX = ? WHERE UUID = ?");
+                                    preparedStatement.setString(1, profile.getClan());
+                                    preparedStatement.setString(2, profile.getClanrank());
+                                    preparedStatement.setInt(3, profile.getLadder());
+                                    preparedStatement.setString(4, profile.getInvites());
+                                    preparedStatement.setString(5, profile.getLeader());
+                                    preparedStatement.setString(6, profile.getPrefix());
+                                    preparedStatement.setString(7, player.getUniqueId().toString());
+                                    preparedStatement.executeUpdate();
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                                try {
+                                    PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE clans SET NAME = ?, PREFIX = ?, LEADER = ?, SIZE = ? WHERE UUID = ?");
+                                    preparedStatement.setString(1, clan.getName());
+                                    preparedStatement.setString(2, clan.getPrefix());
+                                    preparedStatement.setString(3, clan.getLeader());
+                                    preparedStatement.setInt(4, clan.getSize());
+                                    preparedStatement.setInt(5, clan.getUuid());
+                                    preparedStatement.executeUpdate();
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
                             } else {
                                 player.sendMessage(ChatColor.RED + "Sorry, but the clan is full.");
                                 profile.setInvites("null");
@@ -297,7 +369,7 @@ public class ClansCommand implements CommandExecutor {
                         }
                         Clan clan1 = new Clan(player.getName(), clan, prefix);
                         ClanPlayer clanPlayer = new ClanPlayer(player.getUniqueId(), clan1, "leader", 5, player);
-                        clan1.getMembers().add(clanPlayer);
+                        Fall.getInstance().getClanManager().addToClan(clan1, clanPlayer);
                         Fall.getInstance().getClanManager().createClan(clan1);
                         player.sendMessage(ChatColor.GREEN + "You have successfully created " + clan + ".");
                         profile.setClan(clan);
@@ -311,6 +383,31 @@ public class ClansCommand implements CommandExecutor {
                         clan1.setPrefix(prefix);
                         clan1.setUuid(uuid);
                         clan1.setSize(1);
+                        clan1.setOnline(1);
+                        try {
+                            PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE profiles SET CLAN = ?, CLANRANK = ?, LADDER =? , INVITES =? , LEADER = ?, PREFIX = ? WHERE UUID = ?");
+                            preparedStatement.setString(1, profile.getClan());
+                            preparedStatement.setString(2, profile.getClanrank());
+                            preparedStatement.setInt(3, profile.getLadder());
+                            preparedStatement.setString(4, profile.getInvites());
+                            preparedStatement.setString(5, profile.getLeader());
+                            preparedStatement.setString(6, profile.getPrefix());
+                            preparedStatement.setString(7, player.getUniqueId().toString());
+                            preparedStatement.executeUpdate();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            PreparedStatement preparedStatement = Fall.getInstance().getMySQL().getConnection().prepareStatement("UPDATE clans SET NAME = ?, PREFIX = ?, LEADER = ?, SIZE = ? WHERE UUID = ?");
+                            preparedStatement.setString(1, clan1.getName());
+                            preparedStatement.setString(2, clan1.getPrefix());
+                            preparedStatement.setString(3, clan1.getLeader());
+                            preparedStatement.setInt(4, clan1.getSize());
+                            preparedStatement.setInt(5, clan1.getUuid());
+                            preparedStatement.executeUpdate();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                         return true;
                     }
                     Arrays.asList(message).forEach(msg -> player.sendMessage(StringUtil.format(msg)));

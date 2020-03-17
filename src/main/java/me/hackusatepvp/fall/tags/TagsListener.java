@@ -32,8 +32,16 @@ public class TagsListener implements Listener {
                                 return;
                             }
                         }
+
                         if (event.getClickedInventory().getName().contains("Common")) {
                             event.setCancelled(true);
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+                                player.openInventory(Fall.getInstance().getTagsGUI().getTagsGUI(player));
+                            }
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
+                                profile.setTag("null");
+                                player.sendMessage(StringUtil.format("&cYou have removed your tag."));
+                            }
                             Tags tags = Tags.getByName(StringUtil.format(event.getCurrentItem().getItemMeta().getDisplayName()));
                             if (tags != null) {
                                 tags.onClick(player, profile, event.getCurrentItem().getItemMeta().getDisplayName());
@@ -41,6 +49,13 @@ public class TagsListener implements Listener {
                         }
                         if (event.getClickedInventory().getName().contains("Rare")) {
                             event.setCancelled(true);
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+                                player.openInventory(Fall.getInstance().getTagsGUI().getTagsGUI(player));
+                            }
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
+                                profile.setTag("null");
+                                player.sendMessage(StringUtil.format("&cYou have removed your tag."));
+                            }
                             Tags tags = Tags.getByName(StringUtil.format(event.getCurrentItem().getItemMeta().getDisplayName()));
                             if (tags != null) {
                                 tags.onClick(player, profile, event.getCurrentItem().getItemMeta().getDisplayName());
@@ -48,6 +63,13 @@ public class TagsListener implements Listener {
                         }
                         if (event.getClickedInventory().getName().contains("Legendary")) {
                             event.setCancelled(true);
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+                                player.openInventory(Fall.getInstance().getTagsGUI().getTagsGUI(player));
+                            }
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
+                                profile.setTag("null");
+                                player.sendMessage(StringUtil.format("&cYou have removed your tag."));
+                            }
                             Tags tags = Tags.getByName(StringUtil.format(event.getCurrentItem().getItemMeta().getDisplayName()));
                             if (tags != null) {
                                 tags.onClick(player, profile, event.getCurrentItem().getItemMeta().getDisplayName());
@@ -55,6 +77,13 @@ public class TagsListener implements Listener {
                         }
                         if (event.getClickedInventory().getName().contains("Special")) {
                             event.setCancelled(true);
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Back")) {
+                                player.openInventory(Fall.getInstance().getTagsGUI().getTagsGUI(player));
+                            }
+                            if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
+                                profile.setTag("null");
+                                player.sendMessage(StringUtil.format("&cYou have removed your tag."));
+                            }
                             Tags tags = Tags.getByName(StringUtil.format(event.getCurrentItem().getItemMeta().getDisplayName()));
                             if (tags != null) {
                                 tags.onClick(player, profile, event.getCurrentItem().getItemMeta().getDisplayName());

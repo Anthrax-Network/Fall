@@ -68,7 +68,9 @@ commands:
     description: View all ranks and the requirements.
   reply:
     aliases: [r]
-    description: Message back to a pseron more easily
+    description: Message back to a pseron more easily.
+  rename:
+    description: Rename the current item in your hand.
   rules:
     description: View the rules for the server
   settings:

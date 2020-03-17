@@ -7,6 +7,7 @@ import me.hackusatepvp.fall.util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -61,6 +62,14 @@ public class StaffManager {
         }
     }
 
+    public ItemStack getInfo() {
+        ItemStack itemStack = new ItemStack(Material.ITEM_FRAME);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(StringUtil.format("&7* &9Info"));
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
     public void setHiden(Player player, boolean b) {
         if (b) {
             hidestaff.add(player);
@@ -83,8 +92,11 @@ public class StaffManager {
         }
     }
 
-    public void giveItems(Player player) {
-        player.getInventory().addItem(getVanish(player));
+    public Inventory giveItems(Player player) {
+        Inventory i = Bukkit.createInventory(null, 36, "");
+        i.setItem(0, getVanish(player));
+        i.setItem(2, getInfo());
+        return i;
     }
 
     public void addStaff(UUID uuid, Staff staffs) {

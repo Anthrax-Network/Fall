@@ -28,6 +28,7 @@ public abstract class Tags {
     private static final Tags DAWN_TAG = new DawnTag();
     private static final Tags DOG_TAG = new DogTag();
     private static final Tags OOF_TAG = new OofTag();
+    private static final Tags UWU_TAG = new UwuTag();
 
     private static final Tags HERO_TAG = new HeroTag();
     private static final Tags KILLER_TAG = new KillerTag();

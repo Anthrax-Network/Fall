@@ -1,6 +1,5 @@
 package me.hackusatepvp.fall.tags.common.impl;
 
-import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.profile.Profile;
 import me.hackusatepvp.fall.tags.Tags;
 import me.hackusatepvp.fall.util.StringUtil;
@@ -10,25 +9,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class CatTag extends Tags {
+public class UwuTag extends Tags {
 
-    public CatTag() {
-        super(StringUtil.format("&dCat &7Tag"));
+    public UwuTag() {
+        super(StringUtil.format("&dUwu &7Tag"));
     }
 
     @Override
     public String getName() {
-        return StringUtil.format("&dCat &7Tag");
+        return StringUtil.format("&dUwu &7Tag");
     }
 
     @Override
     public String getPrefix() {
-        return "&7[&dCat&7]";
+        return "&7[&dUwu&7]";
     }
 
     @Override
     public String getPermission() {
-        return "fall.tags.common.cat";
+        return "fall.tags.common.uwu";
     }
 
     @Override
@@ -40,14 +39,14 @@ public class CatTag extends Tags {
     public ItemStack getIcon() {
         ItemStack itemStack = new ItemStack(Material.NAME_TAG);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(StringUtil.format("&dCat &7Tag"));
+        itemMeta.setDisplayName(StringUtil.format("&dUwu &7Tag"));
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
 
     @Override
     public void onClick(Player player, Profile profile, String tag) {
-        if (tag.contains("Cat")) {
+        if (tag.contains("Uwu")) {
             if (player.hasPermission(getPermission())) {
                 if (isEnabled()) {
                     if (!profile.getTag().equals("null")) {

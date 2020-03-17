@@ -30,10 +30,32 @@ public class SpecialCategory extends Category {
     }
 
     @Override
+    public ItemStack getBack() {
+        ItemStack itemStack = new ItemStack(Material.ARROW);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(StringUtil.format("&7* &cBack"));
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    @Override
+    public ItemStack remove() {
+        ItemStack itemStack = new ItemStack(Material.REDSTONE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(StringUtil.format("&7* &cRemove"));
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+
+    @Override
     public Inventory getInventory() {
-        Inventory i = Bukkit.createInventory(null, 36, StringUtil.format("&9Special &7Tags"));
+        Inventory i = Bukkit.createInventory(null, 18, StringUtil.format("&9Special &7Tags"));
         i.setItem(0, Tags.getByName("Christmas").getIcon());
         i.setItem(1, Tags.getByName("Easter").getIcon());
+        i.setItem(10, remove());
+        i.setItem(11, getBack());
+        i.setItem(17, remove());
         return i;
     }
 

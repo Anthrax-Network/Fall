@@ -34,6 +34,10 @@ public abstract class Category {
 
     public abstract ItemStack getIcon();
 
+    public abstract ItemStack getBack();
+
+    public abstract ItemStack remove();
+
     public abstract Inventory getInventory();
 
     public abstract boolean isEnabled();

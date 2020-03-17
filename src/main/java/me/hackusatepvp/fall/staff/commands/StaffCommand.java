@@ -38,7 +38,7 @@ public class StaffCommand implements CommandExecutor {
         player.getInventory().setArmorContents(null);
         player.setGameMode(GameMode.CREATIVE);
         Bukkit.getOnlinePlayers().forEach(instance -> instance.hidePlayer(player));
-        Fall.getInstance().getStaffManager().giveItems(player);
+        player.getInventory().setContents(Fall.getInstance().getStaffManager().giveItems(player).getContents());
         return false;
      }
 }

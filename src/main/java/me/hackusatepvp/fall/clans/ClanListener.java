@@ -2,6 +2,8 @@ package me.hackusatepvp.fall.clans;
 
 import me.hackusatepvp.fall.Fall;
 import me.hackusatepvp.fall.profile.Profile;
+import me.hackusatepvp.fall.tab.TabLink;
+import me.hackusatepvp.fall.util.StringUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -69,7 +71,13 @@ public class ClanListener implements Listener {
         if (Fall.getInstance().getClanManager().getClanPlayer(player) != null && Fall.getInstance().getClanManager().getClanPlayer(player).getClan() != null) {
             if (Fall.getInstance().getClanManager().inClan(player.getUniqueId())) {
                 ClanPlayer clanPlayer = Fall.getInstance().getClanManager().getClanPlayer(player);
-                Fall.getInstance().getClanManager().unload(clanPlayer.getClan());
+                Fall.getInstance().getClanManager().getClan(clanPlayer).getMembers().remove(clanPlayer);
+                if (clanPlayer.getClan().getOnline() == 1) {
+                    Fall.getInstance().getClanManager().unload(clanPlayer.getClan());
+                    clanPlayer.getClan().setOnline(clanPlayer.getClan().getOnline() - 1);
+                } else {
+                    clanPlayer.getClan().setOnline(clanPlayer.getClan().getOnline() - 1);
+                }
             }
         }
     }
@@ -84,6 +92,14 @@ public class ClanListener implements Listener {
                         Clan clan = Fall.getInstance().getClanManager().getClan(clanPlayer.getClan().getName());
                         Fall.getInstance().getClanManager().addToClan(clan, clanPlayer);
                         profile.setClan(clan.getName());
+                        clan.setOnline(clan.getOnline() + 1);
+                        for (ClanPlayer member : clan.getMembers()) {
+                            if (member.getClan().getName().equals(clan.getName())) {
+                                if (member.getPlayer().getName() != player.getName()) {
+                                    member.getPlayer().sendMessage(StringUtil.format("&7* &9" + player.getName() + "&7 has joined"));
+                                }
+                            }
+                        }
                     } else {
                         Clan clan = new Clan(profile.getLeader(), profile.getClan(), profile.getPrefix());
                         Fall.getInstance().getClanManager().load(clan);
@@ -92,6 +108,14 @@ public class ClanListener implements Listener {
                         profile.setLeader(clan.getLeader());
                         profile.setPrefix(clan.getPrefix());
                         profile.setClan(clan.getName());
+                        clan.setOnline(clan.getOnline() + 1);
+                        for (ClanPlayer member : clan.getMembers()) {
+                            if (member.getClan().getName().equals(clan.getName())) {
+                                if (member.getPlayer().getName() != player.getName()) {
+                                    member.getPlayer().sendMessage(StringUtil.format("&7* &9" + player.getName() + "&7 has joined"));
+                                }
+                            }
+                        }
                     }
                 } else {
                     if (Fall.getInstance().getClanManager().getClan(profile.getClan()) != null) {
@@ -99,6 +123,14 @@ public class ClanListener implements Listener {
                         ClanPlayer work = new ClanPlayer(player.getUniqueId(), clan, profile.getClanrank(), profile.getLadder(), player);
                         Fall.getInstance().getClanManager().addToClan(clan, work);
                         profile.setClan(clan.getName());
+                        clan.setOnline(clan.getOnline() + 1);
+                        for (ClanPlayer member : clan.getMembers()) {
+                            if (member.getClan().getName().equals(clan.getName())) {
+                                if (member.getPlayer().getName() != player.getName()) {
+                                    member.getPlayer().sendMessage(StringUtil.format("&7* &9" + player.getName() + "&7 has joined"));
+                                }
+                            }
+                        }
                     } else {
                         Clan clan = new Clan(profile.getLeader(), profile.getClan(), profile.getPrefix());
                         ClanPlayer work = new ClanPlayer(player.getUniqueId(), clan, profile.getClanrank(), profile.getLadder(), player);
@@ -108,6 +140,14 @@ public class ClanListener implements Listener {
                         profile.setLeader(clan.getLeader());
                         profile.setPrefix(clan.getPrefix());
                         profile.setClan(clan.getName());
+                        clan.setOnline(clan.getOnline() + 1);
+                        for (ClanPlayer member : clan.getMembers()) {
+                            if (member.getClan().getName().equals(clan.getName())) {
+                                if (member.getPlayer().getName() != player.getName()) {
+                                    member.getPlayer().sendMessage(StringUtil.format("&7* &9" + player.getName() + "&7 has joined"));
+                                }
+                            }
+                        }
                     }
                 }
             } else {
