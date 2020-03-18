@@ -27,7 +27,7 @@ Use `Fall.getInstance()` to view all the managers you can access.
 - A MySQL database
 
 ## Quests
-This is a deatiled explantation on how quests works. First quests is and is not a donator rank at the same time. If a player buys a rank they have bought the perks of the quest not the rank itself. Meaning, if I buy Fate Rank when I'm at rider quest my quest will still be rider and I wil still have to rank up through the quests in order to get all of the quest items.
+This is a deatiled explantation on how quests work. First quests is and is not a donator rank at the same time. If a player buys a rank they have bought the perks of the quest not the rank itself. Meaning, if I buy Fate Rank when I'm at rider quest my quest will still be rider and I wil still have to rank up through the quests in order to get all of the quest items, the diffrences is my rank on Scoreboard, Tablistm and Chat will appear as Fate; I will also get the fate kit.
 
 ## Ranks 
 In order to set a player's rank you have to type in console `/rank <player> <rank>` (Caps matter) if
