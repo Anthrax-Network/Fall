@@ -64,7 +64,7 @@ If you are making a plugin and need to get the **Rank** and not the **Quest** us
 ```java
 public String getRank(Player player) {
   Profile profile = Fall.getInstance().getProfileManager(player.getUniqueId());
-  return profile.getDonor() //this will return a string which is the rank
+  return profile.getDonor(); //this will return a string which is the rank
 }
 ```
 
