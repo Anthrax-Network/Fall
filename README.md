@@ -7,7 +7,7 @@ Fall is a competitive kitpvp plugin.
 - Quest (Quests are ways for players to rankup, they also act similiar to a donator rank)
 - Tags (A simple yet demanding cosmetic)
 - MySQL (MySQL is required for the plugin to work)
-- Classes (A special kit that activeates different abilities/effects)
+- Classes (A special kit that activates different abilities/effects)
 - Staff Utils (A simple yet effective staff tools)
 - Kit GUI (Does not contain an actual kit plugin just a gui)
 - Chat Colors (Different colors for players to use in chat)
