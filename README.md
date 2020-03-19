@@ -1,7 +1,7 @@
 # Fall
 
 ## Description
-Fall is a competitive kitpvp plugin. 
+Fall is a competitive kitpvp plugin for 1.7.10. 
 
 ## Features
 - Quest (Quests are ways for players to rankup, they also act similiar to a donator rank)
